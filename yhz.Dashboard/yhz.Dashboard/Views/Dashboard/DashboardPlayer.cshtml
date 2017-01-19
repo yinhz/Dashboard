@@ -1,0 +1,167 @@
+﻿@using yhz.Dashboard.Core.ConfigEx
+@{
+    Layout = null;
+    ViewBag.Title = "Siemens Dashboard";
+}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>@ViewBag.Title</title>
+
+    @*网站风格(bootstrap)、根据 看板配置的主题进行加载*@
+    @if (!string.IsNullOrEmpty(@ViewBag.Theme))
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/themes/@ViewBag.Theme/bootstrap.css" />
+    }
+    else
+    {
+        // 没有则使用默认样式
+        <link rel="stylesheet" type="text/css" href="~/Content/themes/default/bootstrap.css" />
+    }
+
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="~/Scripts/dashboard.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="~/Scripts/highcharts.js"></script>
+    <script type="text/javascript" src="~/Scripts/highchartshelper.js"></script>
+    @*网站风格(highcharts)、这里要根据 看板配置的主题进行加载*@
+    @if (!string.IsNullOrEmpty(@ViewBag.Theme) && @ViewBag.Theme != "default")
+    {
+        <script type="text/javascript" src="~/Content/themes/@ViewBag.Theme/highcharts-theme.js"></script>
+    }
+    <style>
+        html {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+
+        .maindiv {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            /*border: 10px solid blue;*/
+        }
+
+        .DashboardElement {
+            position: absolute;
+            display: block;
+            overflow: hidden;
+            padding: 10px;
+            /*border: 5px solid red;*/
+        }
+    </style>
+</head>
+<body>
+    <script>
+        m_paras = "@HttpUtility.UrlEncode(string.IsNullOrEmpty(ViewBag.Paras) ? "" : ViewBag.Paras,System.Text.Encoding.UTF8)";
+        m_theme = '@ViewBag.Theme';
+    </script>
+
+
+
+    @{
+        
+        for (int i = 0; i < 1; i++)
+        {
+            string guid = System.Guid.NewGuid().ToString().Replace("-", "");
+
+            if (ViewBag.DashboardConfig != null && !string.IsNullOrEmpty(@ViewBag.DashboardConfig.BackgroundImagePath))
+            {
+                <style>
+                #_@guid {
+                    background: url(@ViewBag.DashboardConfig.BackgroundImagePath);
+                    background-size: 100% 100%;
+                }
+                </style>
+            }
+
+            <div class="maindiv" id="_@guid" style="width:100%;height:100%" rownums="@ViewBag.DashboardConfig.RowNums" columnnums="@ViewBag.DashboardConfig.ColumnNums">
+                @foreach (var elementConfig in ViewBag.DashboardConfig.ElementConfigs)
+                {
+                    <div id="dbe_@elementConfig.ElementId"
+                            class="DashboardElement"
+                            style="z-index:@elementConfig.ZIndex"
+                            rowindex="@elementConfig.RowIndex"
+                            columnindex="@elementConfig.ColumnIndex"
+                            rowspan="@elementConfig.RowSpan"
+                            columnspan="@elementConfig.ColumnSpan">
+                        @*@Html.Raw(yhz.Dashboard.Core.Config.DashboardConfig.GetElementRederHtml(elementConfig))*@
+                        @Html.Raw(yhz.Dashboard.Core.ConfigEx.DashboardElementConfigEx.RenderHtml(elementConfig))
+                    </div>
+                }
+            </div>
+        }
+        
+    }
+    <script>
+
+        function SetSize() {
+
+            var _win = $("html");
+
+            // 设置布局Div大小
+            var _mainDiv = $(".maindiv");
+
+            _mainDiv.css(
+                "width",
+                _win.innerWidth()
+                -
+                (parseInt(_mainDiv.css("margin-left")) + parseInt(_mainDiv.css("margin-right")))
+                );
+
+            _mainDiv.css(
+                "height",
+                _win.innerHeight()
+                -
+                (parseInt(_mainDiv.css("margin-top")) + parseInt(_mainDiv.css("margin-bottom")))
+                );
+
+            var rowHeight = _mainDiv.height() / _mainDiv.attr("rownums");
+            var columnWidth = _mainDiv.width() / _mainDiv.attr("columnnums");
+
+            var elements = $(".maindiv > .DashboardElement");
+
+            for (var i = 0; i < elements.length; i++) {
+                var $ele = $(elements[i]);
+
+                var rowIndex = $ele.attr("rowindex");
+                var columnIndex = $ele.attr("columnindex");
+                var rowSpan = $ele.attr("rowspan");
+                var columnSpan = $ele.attr("columnspan");
+
+                $ele.css("top", rowHeight * rowIndex);
+                $ele.css("left", columnWidth * columnIndex);
+                $ele.css("width", columnWidth * columnSpan);
+                $ele.css("height", rowHeight * rowSpan);
+            }
+        }
+
+        SetSize();
+
+        $(document).ready(function (e) {
+            //窗口大小改变事件
+            $(window).resize(function (e1) {
+                SetSize();
+            });
+
+            $(document).resize(function (e2) {
+                SetSize();
+            });
+        });
+
+    </script>
+</body>
+</html>

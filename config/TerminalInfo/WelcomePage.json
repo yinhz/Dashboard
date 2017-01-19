@@ -1,0 +1,33 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardTerminalInfo, yhz.Dashboard.Core",
+  "TerminalId": "WelcomePage",
+  "RedirectTerminalId": "",
+  "RedirectTerminalName": "",
+  "TerminalName": "Welcome Dashboard",
+  "Ip": "::1",
+  "Dashboards": [
+    {
+      "$type": "yhz.Dashboard.Core.Config.TerDashboardConfig, yhz.Dashboard.Core",
+      "PlayOrder": 0,
+      "PlayCycle": 60,
+      "Theme": "default",
+      "Paras": "",
+      "DashboardId": "0ef2dadb51c4441fa3a6f0b89d5219fd",
+      "DashboardName": "Dashboard_1",
+      "Descript": null,
+      "RowNums": 1,
+      "ColumnNums": 1,
+      "ElementConfigs": [],
+      "QueryParas": null,
+      "BackgroundImagePath": null,
+      "CreateTime": "2017-01-19T14:37:36.4697318+09:00"
+    }
+  ],
+  "DashboardId": null,
+  "DashboardName": "",
+  "Paras": "null",
+  "IsForbidden": false,
+  "LastEditTime": "20170119143918344",
+  "Theme": "default",
+  "CreateTime": "2017-01-19T14:33:55.5897318+09:00"
+}

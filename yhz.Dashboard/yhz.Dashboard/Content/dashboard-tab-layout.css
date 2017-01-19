@@ -1,0 +1,28 @@
+﻿.db_lay_tab {
+    background-color:#f3ffdc;
+    opacity:1;
+    width: 1024px;
+    height: 768px;
+    border: 2px solid red;
+    table-layout: fixed;
+    overflow: hidden;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 1px;
+}
+
+.db_lay_tab td {
+    border: 2px dashed white;
+}
+
+.db_lay_tab_td_hover {
+    background-color: #efb96e;
+}
+
+.db_lay_tab_td_selected {
+    background-color: rgba(255, 255, 218, 0.80);
+}
+
+.db_lay_tab_td_highligth {
+    background-color:rgba(255, 241, 126, 0.80);
+}

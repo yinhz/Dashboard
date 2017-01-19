@@ -1,0 +1,336 @@
+﻿@{
+    Layout = "~/Views/Shared/Portal.cshtml";
+}
+
+<div class="col-lg-12 partPage">
+    <div id="editArea" class="panel panel-default" style="display:none">
+        <div class="panel-heading">
+            @TerminalRes.list_title
+            <button class="btn btn-success" style="float:right;" type="button" onclick="saveConfig();">@CommonRes.Save</button>
+        </div>
+        <div id="editDataDiv" class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_name</span>
+                        <input type="text" id="e_terminalname" class="form-control" placeholder="@TerminalRes.model_name" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+
+                @*<div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_dashboard</span>
+                            <select id="e_dashboardname" class="form-control">
+                                @{
+                                    foreach (var dbc in yhz.Dashboard.Core.DashboardRepository.DashboardConfigs)
+                                    {
+                                        <option value="@dbc.DashboardId">@dbc.DashboardName</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>*@
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_forbidden</span>
+                        <select id="e_isforbidden" class="form-control">
+                            <option value="false">N</option>
+                            <option value="true">Y</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_theme</span>
+                        <select id="e_theme" class="form-control">
+                            @{
+                                foreach (var theme in yhz.Dashboard.GlobalResources.Themes)
+                                {
+                            <option value="@theme">@theme</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!--终端可播放的看板列表-->
+            <div class="row" style="margin-top:5px;">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <i class="glyphicon glyphicon-list-alt"></i> @TerminalRes.model_dashboard
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_dashboard</span>
+                                        <select id="s_dashboardname" class="form-control">
+                                            @{
+                                                foreach (var dbc in yhz.Dashboard.Core.DashboardRepository.DashboardConfigs)
+                                                {
+                                            <option value="@dbc.DashboardId">@dbc.DashboardName</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_playorder</span>
+                                        <input type="text" id="e_playorder" class="form-control" placeholder="@TerminalRes.model_playorder" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_playcycle</span>
+                                        <input type="text" id="e_playcycle" class="form-control" placeholder="@TerminalRes.model_playcycle" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                                <div class="col-lg-1">
+                                    <button class="btn btn-danger" onclick="addDashboard()">@CommonRes.Add</button>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-lg-3">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_theme</span>
+                                        <select id="e_dashboard_theme" class="form-control">
+                                            @{
+                                                foreach (var theme in yhz.Dashboard.GlobalResources.Themes)
+                                                {
+                                            <option value="@theme">@theme</option>
+                                                }
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_para</span>
+                                        <input type="text" id="e_dashboard_para" class="form-control" placeholder="@TerminalRes.model_para" aria-describedby="basic-addon1">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row" style="margin-top:5px;">
+                                <div class="col-lg-12">
+                                    <table id="dashboard_table" class="table table-striped table-hover"></table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" style="margin-top:5px;">
+                <div class="col-md-12">
+                    <div>
+                        <link type="text/css" rel="stylesheet" href="~/Content/ace/jsoneditor.min.css" />
+                        <script type="text/javascript" src="~/Scripts/ace/jsoneditor.min.js"></script>
+                        <script type="text/javascript" src="~/Scripts/ace/ace.js"></script>
+                        <script type="text/javascript" src="~/Scripts/ace/jsonlint.js"></script>
+
+                        <style>
+                            code {
+                                background-color: #f5f5f5;
+                            }
+                        </style>
+
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td style="height:400px;"><div style="height:100%;" id="container1"></div></td>
+                                    <td style="height:400px;"><div style="height:100%;" id="container2"></div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <script>
+
+                            // json 格式化工具脚本
+
+                            var container1 = document.getElementById('container1');
+                            var options1 = {
+                                mode: 'text',
+                                error: function (err) {
+                                    alert(err.toString());
+                                },
+                                change: function () {
+                                    $("#dataEditInput").val(editor1.getText());
+
+                                    try {
+                                        if (editor1 != null) {
+                                            editor2.setText(editor1.getText());
+                                            editor2.expandAll();
+                                        }
+                                    }
+                                    catch (e) { }
+                                }
+                            };
+                            var editor1 = new JSONEditor(container1, options1, null);
+
+                            var container2 = document.getElementById('container2');
+                            var options2 = {
+                                mode: "view",
+                                error: function (err) {
+                                    alert(err.toString());
+                                }
+                            };
+                            var editor2 = new JSONEditor(container2, options2, null);
+
+                            function initEditor(jsontxt) {
+                                editor1.setText(jsontxt);
+                                editor1.textarea.focus();
+                                editor1.format();
+                                editor2.setText(editor1.getText());
+                                editor2.expandAll();
+                            }
+
+                            function getEditorText() {
+                                return editor1.getText();
+                            }
+                        </script>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="redirectArea" class="panel panel-default" style="display:none">
+        <div class="panel-heading">
+            @CommonRes.Redirect
+            <button class="btn btn-success" style="float:right;" type="button" onclick="saveRedirectConfig();">@CommonRes.Save</button>
+        </div>
+        <div id="editDataDiv" class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_name</span>
+                        <select id="e_redirectTer" class="form-control">
+                            <option value="">Clear</option>
+                            @{
+                                foreach (var dbc in yhz.Dashboard.Core.DashboardRepository.TerminalInfos)
+                                {
+                                    <option value="@dbc.TerminalId">@dbc.TerminalName [@dbc.TerminalId]</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="listArea" class="panel panel-default">
+
+        <div class="panel-heading">
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <i class="glyphicon glyphicon-list-alt"></i> @TerminalRes.list_title
+                </div>
+                <div class="col-lg-4">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@TerminalRes.model_identification</span>
+                        <input id="add_i_terminalId" class="form-control" type="text" placeholder="@TerminalRes.model_identification" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <button class="btn btn-danger" onclick="addTerminal();"><i class="glyphicon glyphicon-plus"></i> @CommonRes.Add</button>
+                    <button class="btn btn-info" onclick="redirectTerminal();"><i class="glyphicon glyphicon-hand-right"></i> @CommonRes.Redirect</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-body">
+
+            <table class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            <div class="input-group">
+                                @*<span class="input-group-addon">
+
+                                    </span>*@
+                                <input type="checkbox" id="selectAll" />
+                                <span class="form-group">All</span>
+                            </div>
+                            @*@TerminalRes.model_identification*@
+                        </th>
+                        <th>
+                            @TerminalRes.model_identification
+                        </th>
+                        <th>
+                            @TerminalRes.model_name
+                        </th>
+                        <th>
+                            @TerminalRes.model_ip
+                        </th>
+                        @*<th>
+                                @TerminalRes.model_dashboard
+                            </th>*@
+                        <th>
+                            @TerminalRes.model_forbidden
+                        </th>
+                        <th>
+                            @TerminalRes.model_para
+                        </th>
+                        @*<th>
+                                上次编辑时间
+                            </th>*@
+                        <th>
+                            @TerminalRes.model_theme
+                        </th>
+                        <th>
+                            @CommonRes.Redirect
+                        </th>
+                        <th>@CommonRes.Operation</th>
+                    </tr>
+
+
+
+                </thead>
+                @{
+                    foreach (var config in yhz.Dashboard.Core.DashboardRepository.TerminalInfos.OrderBy(t => t.TerminalName))
+                    {
+                        <tr>
+                            <td>
+                                <input name="rowChkItem" type="checkbox" value="@config.TerminalId" />
+                                @*@config.TerminalId*@
+                            </td>
+                            <td>@config.TerminalId</td>
+                            <td>@config.TerminalName</td>
+                            <td>@config.Ip</td>
+                            @*<td>@config.DashboardName</td>*@
+                            <td>@config.IsForbidden</td>
+                            <td>@config.Paras</td>
+                            @*<td>@config.LastEditTime</td>*@
+                            <td><b>@config.Theme</b></td>
+                            <td>@config.RedirectTerminalId</td>
+                            <td>
+                                <input id="@config.TerminalId" type="hidden" value="@yhz.Dashboard.Common.ObjectHelper.SerializeObject(config)" />
+
+                                <a btn btn-primary btn-lg active" role="button" href="#" onclick="showEditor($('#@config.TerminalId').val());">@CommonRes.Edit</a>
+
+                                <a btn btn-primary btn-lg active" role="button" href="/Dashboard/TerminalPlayer?terminalId=@config.TerminalId&index=0" target="_blank">@CommonRes.Preview</a>
+
+                                <a btn btn-primary btn-lg active" role="button" href="#" onclick="deleteConfig('@config.TerminalId',this);">@CommonRes.Delete</a>
+
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript" src="~/Scripts/views/dashboard/terminalinfo.js"></script>

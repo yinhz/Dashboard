@@ -1,0 +1,31 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashBoardTerminalInfo, yhz.Dashboard.Core",
+  "TerminalId": "Dashboard02",
+  "TerminalName": "Dashboard002",
+  "Ip": "134.244.232.113",
+  "Dashboards": [
+    {
+      "$type": "yhz.Dashboard.Core.Config.TerDashBoardConfig, yhz.Dashboard.Core",
+      "PlayOrder": 0,
+      "PlayCycle": 3,
+      "Theme": "default",
+      "Paras": "",
+      "DashBoardId": "223090b460c449fe82ba9ca4a0ff0811",
+      "DashBoardName": "Dashboard_3",
+      "Descript": null,
+      "RowNums": 1,
+      "ColumnNums": 1,
+      "ElementConfigs": [],
+      "QueryParas": null,
+      "BackgroundImagePath": null,
+      "CreateTime": "2016-02-04T15:21:10.1165213+08:00"
+    }
+  ],
+  "DashBoardId": null,
+  "DashBoardName": "",
+  "Paras": "null",
+  "IsForbidden": false,
+  "LastEditTime": "20160204152110393",
+  "Theme": "default",
+  "CreateTime": "2016-02-04T15:20:40.5425642+08:00"
+}

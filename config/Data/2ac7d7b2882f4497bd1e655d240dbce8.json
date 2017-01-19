@@ -1,0 +1,11 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+  "DataId": "2ac7d7b2882f4497bd1e655d240dbce8",
+  "DataName": "PieChart_Test_Data ",
+  "DataBaseName": "SitMesDb_SqlServer",
+  "IsAutoRefresh": true,
+  "Interval": 5000.0,
+  "Sql": "select N'主车间' as 'serieCName',6537 as 'valueCName'\nunion\nselect N'奶台' as 'serieCName',432 as 'valueCName'\nunion\nselect N'制冷间' as 'serieCName',2550 as 'valueCName'\nunion\nselect N'锅炉房' as 'serieCName',1880 as 'valueCName'\nunion\nselect N'餐厅' as 'serieCName',464 as 'valueCName'\nunion\nselect N'保温室' as 'serieCName',4 as 'valueCName'\nunion\nselect N'水处理' as 'serieCName',3180 as 'valueCName'\n",
+  "PreSql": "",
+  "CreateTime": "2016-01-26T11:06:08.7605692+08:00"
+}

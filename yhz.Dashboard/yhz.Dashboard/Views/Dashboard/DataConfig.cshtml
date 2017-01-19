@@ -1,0 +1,196 @@
+﻿@{
+    Layout = "~/Views/Shared/Portal.cshtml";
+}
+
+<div class="col-lg-12 partPage">
+    
+    <div id="listArea" class="panel panel-default">
+        <div class="panel-heading">
+            <i class="glyphicon glyphicon-list-alt"></i> @DataConfigRes.list_title
+            <button class="btn btn-danger" style="float:right;" onclick="addConfig();"><i class="glyphicon glyphicon-plus"></i> @CommonRes.Add</button>
+        </div>
+        <div class="panel-body">
+
+            <table id="maintable" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @DataConfigRes.model_no
+                        </th>
+                        <th>
+                            @DataConfigRes.model_name
+                        </th>
+                        <th>
+                            @DataConfigRes.model_database_name
+                        </th>
+                        <th>
+                            @DataConfigRes.model_auto_refresh
+                        </th>
+                        <th>
+                            @DataConfigRes.model_interval
+                        </th>
+                        <th>
+                            @DataConfigRes.model_auto_refresh
+                        </th>
+                        <th>
+                            @CommonRes.Operation
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        int rowNum = 0;
+
+                        foreach (var config in yhz.Dashboard.Core.DashboardRepository.DataConfigs)
+                        {
+                            <tr>
+                                <td>@(++rowNum)</td>
+                                @*<td>@config.DataId</td>*@
+                                <td>@config.DataName</td>
+                                <td>@config.DataBaseName</td>
+                                <td>@(config.IsAutoRefresh ? "是" : "否")</td>
+                                <td>@config.Interval</td>
+                                <td>@config.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                <td>
+                                    <input id="@config.DataId" type="hidden" value="@yhz.Dashboard.Common.ObjectHelper.SerializeObject(config)" />
+                                    <a role="button" href="#" onclick="showEditor($.parseJSON($('#@config.DataId').val()), true, $(this).closest('tr'));">@CommonRes.Edit</a>
+                                    <a role="button" href="#" onclick="cloneConfig('@config.DataId',this);">@CommonRes.Duplicate</a>
+                                    <a role="button" href="#" onclick="deleteConfig('@config.DataId',this);">@CommonRes.Delete</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+
+
+
+            @{
+                if (rowNum > 0)
+                {
+                    <script>
+                        // 页面加载完成 默认编辑第一行
+                        $(document).ready(function () {
+                            showEditor($.parseJSON($('#@yhz.Dashboard.Core.DashboardRepository.DataConfigs[0].DataId').val()), false, $("#maintable tbody tr:eq(0)"));
+                        });
+                    </script>
+                }
+            }
+
+        </div>
+    </div>
+
+    <div id="editArea" class="panel panel-default" style="display:block;">
+
+        <input id="curEditDataId" type="hidden" value="" />
+
+        <div class="panel-heading">
+            <i class="glyphicon glyphicon-edit"></i> @CommonRes.Edit
+            <button class="btn btn-success" style="float:right;" type="button" onclick="saveConfig();"><i class="glyphicon glyphicon-ok"></i> @CommonRes.Save</button>
+            @*<div class="row">
+                <div class="col-lg-11">
+                    数据项编辑
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">数据项编辑</span>
+                        <input type="text" id="e_dataid" 
+                               class="form-control" 
+                               readonly="readonly" 
+                               disabled="disabled"
+                               placeholder="请选择要编辑的项" 
+                               aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-success" style="float:right;" type="button" onclick="saveConfig();">保存</button>
+                </div>
+            </div>*@
+        </div>
+        <div id="editDataDiv" class="panel-body">
+            @*<div class="input-group">
+                    <input id ="dataEditInput" type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
+                    <span class="input-group-btn" id="basic-addon2">
+                    </span>
+                </div>*@
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@DataConfigRes.model_name</span>
+                        <input type="text" id="e_dataname" class="form-control" placeholder="@DataConfigRes.model_name" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@DataConfigRes.model_database_name</span>
+                        <select id="e_databasename" class="form-control">
+                            @{
+                                foreach (var db in yhz.Dashboard.Core.DashboardRepository.DataBasies)
+                                {
+                                    <option value="@db.DataBaseName">@db.DataBaseName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@DataConfigRes.model_auto_refresh</span>
+                        <select id="e_isautorefresh" class="form-control">
+                            <option value="false">N</option>
+                            <option value="true">Y</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@DataConfigRes.model_interval</span>
+                        <input type="text" id="e_interval" class="form-control" placeholder="@DataConfigRes.model_interval">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top:5px;">
+                <div class="col-lg-12" style="margin-top:5px;">
+                    @*<link rel=stylesheet href="~/Scripts/CodeMirror-master/doc/docs.css">*@
+                    <link rel="stylesheet" href="~/Scripts/CodeMirror-master/lib/codemirror.css">
+
+                    <script src="~/Scripts/CodeMirror-master/lib/codemirror.js"></script>
+
+                    <script src="~/Scripts/CodeMirror-master/mode/sql/sql.js"></script>
+
+                    <link rel="stylesheet" href="~/Scripts/CodeMirror-master/addon/hint/show-hint.css" />
+
+                    <script src="~/Scripts/CodeMirror-master/addon/hint/show-hint.js"></script>
+                    <script src="~/Scripts/CodeMirror-master/addon/hint/sql-hint.js"></script>
+
+                    <script src="~/Scripts/CodeMirror-master/mode/xml/xml.js"></script>
+                    <script src="~/Scripts/CodeMirror-master/addon/display/fullscreen.js"></script>
+
+                    <textarea id="e_sql" style="width:100%;" class="form-control" placeholder="Sql语句"></textarea>
+
+                    <script>
+                        var editor_sql =
+                            CodeMirror.fromTextArea(document.getElementById('e_sql'), {
+                                mode: "text/x-sql",
+                                indentWithTabs: true,
+                                smartIndent: true,
+                                lineNumbers: true,
+                                matchBrackets: true,
+                                autofocus: true,
+                                extraKeys: {
+                                    "Ctrl-Space": "autocomplete",
+                                    "F11": function (cm) {
+                                        cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+                                    },
+                                    "Esc": function (cm) {
+                                        if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+                                    }
+                                }
+                            });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/views/dashboard/dataconfig.js" type="text/javascript"></script>

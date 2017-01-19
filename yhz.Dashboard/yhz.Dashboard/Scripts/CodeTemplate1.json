@@ -1,0 +1,8 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashBoardElementTypeConfig, yhz.Dashboard.Core",
+  "TypeName": "无数据支持(***请改名***)",
+  "Descript": "无数据支持",
+  "HtmlTemplate": "<!--Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n\t可编辑Html区域\n\t可使用变量 [ElementId]\n    已自动生成容器Div.Id 为 mainDvi_ElementId.保证全局唯一.\n\t内容自行编辑。如 <table id=\"table\" class=\"table table-responsive table-hover\"></table>\n-->\n<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  \n  <!--**********自定义编码结束**********-->\n</div>",
+  "JavaScriptTemplate": "//Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n//可使用变量 [ElementId]\n//自动生成的 函数（f + 元素ID）、保证全局唯一\n\nfunction f_[ElementId](elementId) {\n  // 方法属性 ElementId 赋值\n  this.ElementId = elementId;\n  \n  // 方法赋值\n  this.Handle = internalHandle;\n  \n  // 内部处理方法\n  function internalHandle() {\n    // ********** 自定义编码 Begin **********\n        \n    // ********** 自定义编码 End **********\n  }\n}\n\n// 实例化处理方法 并调用其 Hanlde 方法\nvar fun_[ElementId] = new f_[ElementId](\"[ElementId]\").Handle();",
+  "CssTemplate": "/*Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n  可编辑样式表区域\n  建议：为了不影响全局样式\n       建议编写的样式加上限制 #mainDiv_[ElementId]\n  例如：\n      自定义超链接样式\n      #mainDiv_[ElementId] a{\n            \n      }\n */\n\n/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n/********** 自定义样式结束 **********/"
+}

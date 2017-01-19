@@ -1,0 +1,30 @@
+﻿
+<html>
+
+<body>
+
+    <script src="~/Scripts/jquery-2.1.4.js"></script>
+    <script>
+        function aa() {
+            $.post(
+            "/Test/Index",
+            { u: { Name: "1", Age: "2" }, str: "2" },
+            function (data, status) {
+                if (data.Success) {
+                    $(ele).closest("tr").remove();
+                }
+                else {
+                    alert("删除失败！异常信息：" + data.Info)
+                }
+            },
+            "json");
+        }
+    </script>
+    <button onclick="aa()">ssss</button>
+    
+</body>
+
+
+
+
+</html>

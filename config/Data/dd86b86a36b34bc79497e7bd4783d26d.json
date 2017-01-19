@@ -1,0 +1,11 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+  "DataId": "dd86b86a36b34bc79497e7bd4783d26d",
+  "DataName": "Dashboard_Test_Data",
+  "DataBaseName": "SitMesDb_SqlServer",
+  "IsAutoRefresh": true,
+  "Interval": 7000.0,
+  "Sql": "select 14704.19 '运营处', 47.88 '单吨标准',41.75 '单吨实际',-6.13 '差异'\nunion all\nselect 866.95 '奶台', 2.8 '单吨标准',2.46 '单吨实际',-0.34 '差异'\nunion all\nselect 4004.50 '锅炉房', 3.46 '单吨标准',11.37 '单吨实际',7.91 '差异'\nunion all\nselect 13174.63 '水处理', 17.99 '单吨标准',37.41 '单吨实际',19.42 '差异'\nunion all\nselect 4479.27 '污水厂', 7.97 '单吨标准',12.72 '单吨实际',4.75 '差异'\n",
+  "PreSql": "",
+  "CreateTime": "2016-01-20T17:58:06.1037844+08:00"
+}

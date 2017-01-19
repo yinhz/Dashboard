@@ -1,0 +1,72 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashBoardElementConfig, yhz.Dashboard.Core",
+  "ZIndex": 0,
+  "Descript": "Chart",
+  "LocElementId": null,
+  "ElementId": "7e07ae2a3cf94fd1a91eb11783f4cf89",
+  "ElementName": "Siemens_PieChart_Test",
+  "RowIndex": 0,
+  "ColumnIndex": 0,
+  "RowSpan": 1,
+  "ColumnSpan": 1,
+  "TypeConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashBoardElementTypeConfig, yhz.Dashboard.Core",
+    "TypeId": "326598ae46534b0bbaaf1256a75a5ff9",
+    "TypeName": "Dashboard_PieChart",
+    "Descript": "Dashboard pie chart",
+    "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <div id=\"container\" style=\"height:100%;width:100%\"></div>\n</div>",
+    "JavaScriptTemplate": "function f_[ElementId](config) {\n  this.Config = config;\n  \n  this.Handle = internalHandle;\n  \n  function GetData(){\n\n    GetDashBoardData(config.DataId,function(json){\n\n      // 实例化 图表辅助工具\n      var helper = new HighchartsHelper();\n      // 获取 系列\n      var seriesData = helper.getPieSeriesData(json.Table, \"[SerieColumnName]\", \"[ValueColumnName]\");\n      \n      // 获取图表 tilte\n      var title = \"[Title]\";\n      // 获取图表子标题\n      var subtitle = \"[subTitle]\";\n      \n      $(\"#mainDiv_\" + config.ElementId + \" #container\").highcharts({\n        credits: {\n        \tenabled: false\n        },\n        title: {\n            text: title,\n        },\n        subtitle: {\n            text: subtitle,\n        },\n        plotOptions: {\n            pie: {\n                allowPointSelect: true,\n                cursor: 'pointer',\n                dataLabels: {\n                    enabled: true,\n                    color: '#000000',\n                    connectorColor: '#000000',\n                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'\n                }\n            }\n        },\n        series: [{\n            type: 'pie',\n            data: seriesData\n        }]\n    });\n    });\n  }\n  \n  function internalHandle() {\n    if(this.Config.IsAutoRefresh)\n    {\n      GetData();\n      setInterval(function () { GetData() }, this.Config.Interval);\n    }\n    else\n    {\n      GetData();\n    }\n  }\n}\n\nvar fun_[ElementId] = \n  new f_[ElementId]({\"ElementId\" : \"[ElementId]\",\"DataId\": \"[DataId]\",\"IsAutoRefresh\": [IsAutoRefresh],\"Interval\": [Interval]}).Handle();",
+    "CssTemplate": "#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}",
+    "CreateTime": "2016-01-26T10:48:23.2309211+08:00",
+    "ParaConfigs": [
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "ba4aa2780c6741a28d566d007ecd1b23",
+        "ParaName": "SerieColumnName",
+        "ParaCode": "SerieColumnName",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">SerieColumnName</span>\n  <input id=\"SerieColumnName\" value=\"serieCName\" class=\"form-control\" type=\"text\" placeholder=\"SerieColumnName\" />\n</div>",
+        "Value": "serieCName"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "33e0cca56c81459684ef700b42abc48c",
+        "ParaName": "ValueColumnName",
+        "ParaCode": "ValueColumnName",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">ValueColumnName</span>\n  <input id=\"ValueColumnName\" value=\"valueCName\" class=\"form-control\" type=\"text\" placeholder=\"ValueColumnName\" />\n</div>",
+        "Value": "valueCName"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "c85dcbcdc78f48ca8cda106f135c1386",
+        "ParaName": "Title",
+        "ParaCode": "Title",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Title</span>\n  <input id=\"Title\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"Title,can be empty\" />\n</div>",
+        "Value": "Pie Title Test"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "1f95f1a0fbd34db9b79fabcfd7047f7b",
+        "ParaName": "subTitle",
+        "ParaCode": "subTitle",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">subTitle</span>\n  <input id=\"subTitle\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"subTitle,can be empty\" />\n</div>",
+        "Value": "Pie SubTitle Test"
+      }
+    ]
+  },
+  "DataConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashBoardDataConfig, yhz.Dashboard.Core",
+    "DataId": "2ac7d7b2882f4497bd1e655d240dbce8",
+    "DataName": "PieChart_Test_Data ",
+    "DataBaseName": "SitMesDb_SqlServer",
+    "IsAutoRefresh": true,
+    "Interval": 5000.0,
+    "Sql": "select 'TeamA' as 'serieCName',500 as 'valueCName'\nunion\nselect 'TeamB' as 'serieCName',300 as 'valueCName'\nunion\nselect 'TeamC' as 'serieCName',200 as 'valueCName'\nunion\nselect 'TeamD' as 'serieCName',900 as 'valueCName'",
+    "PreSql": "",
+    "CreateTime": "2016-01-26T11:06:08.7605692+08:00"
+  },
+  "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <div id=\"container\" style=\"height:100%;width:100%\"></div>\n</div>",
+  "JavaScriptTemplate": "function f_[ElementId](config) {\n  this.Config = config;\n  \n  this.Handle = internalHandle;\n  \n  function GetData(){\n\n    GetDashBoardData(config.DataId,function(json){\n\n      // 实例化 图表辅助工具\n      var helper = new HighchartsHelper();\n      // 获取 系列\n      var seriesData = helper.getPieSeriesData(json.Table, \"serieCName\", \"valueCName\");\n      \n      // 获取图表 tilte\n      var title = \"Pie Title Test\";\n      // 获取图表子标题\n      var subtitle = \"Pie SubTitle Test\";\n      \n      $(\"#mainDiv_\" + config.ElementId + \" #container\").highcharts({\n        credits: {\n        \tenabled: false\n        },\n        title: {\n            text: title,\n        },\n        subtitle: {\n            text: subtitle,\n        },\n        plotOptions: {\n            pie: {\n                allowPointSelect: true,\n                cursor: 'pointer',\n                dataLabels: {\n                    enabled: true,\n                    color: '#000000',\n                    connectorColor: '#000000',\n                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'\n                }\n            }\n        },\n        series: [{\n            type: 'pie',\n            data: seriesData\n        }]\n    });\n    });\n  }\n  \n  function internalHandle() {\n    if(this.Config.IsAutoRefresh)\n    {\n      GetData();\n      setInterval(function () { GetData() }, this.Config.Interval);\n    }\n    else\n    {\n      GetData();\n    }\n  }\n}\n\nvar fun_[ElementId] = \n  new f_[ElementId]({\"ElementId\" : \"[ElementId]\",\"DataId\": \"[DataId]\",\"IsAutoRefresh\": [IsAutoRefresh],\"Interval\": [Interval]}).Handle();",
+  "CssTemplate": "#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}",
+  "RenderHtml": "",
+  "CreateTime": "2016-01-26T13:52:39.7000838+08:00"
+}

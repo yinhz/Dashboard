@@ -1,0 +1,97 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Siemens Dashboard";
+}
+
+<style>
+    .maindiv {
+        position:relative;
+        margin:20px;
+        display:block;
+    }
+
+    .DashboardElement {
+        position:absolute;
+        display:block;
+        overflow:hidden;
+        padding:5px;
+        border:1px solid black;
+    }
+</style>
+<script src="~/Scripts/jquery-2.1.4.js" type="text/javascript"></script>
+
+<div class="container maindiv" rownums="8" columnnums="8">
+
+    <div style="height:100%;width:100%;border:5px solid red;"
+         rowindex="0" columnindex="0" rowspan="4" columnspan="4"
+         class="DashboardElement">
+        <div style="height:100%;width:100%;border:5px solid black;"></div>
+    </div>
+
+    <div style="height:100%;width:100%;border:5px solid red;"
+         rowindex="4" columnindex="4" rowspan="4" columnspan="4"
+         class="DashboardElement">
+        <canvas id="canvas" style="height:100%;width:100%;border:5px solid black;"></canvas>
+		// 加载图表
+        var ctx = document.getElementById("canvas").getContext("2d");
+        new Chart(ctx).Line(lineChartData, {
+            responsive: true,
+            bezierCurve: false,
+			onAnimationComplete = function(){$("canvas").css("height");}
+        });
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function (e) {
+        SetSize();
+        
+        //窗口大小改变事件
+        $(window).resize(function (e1) {
+            SetSize();
+        });
+    });
+
+    function SetSize()
+    {
+        var _win = $(window);
+
+        // 设置布局Div大小
+        var _container = $(".maindiv");
+
+        _container.css(
+            "width",
+            _win.innerWidth()
+            -
+            (parseInt(_container.css("margin-left")) + parseInt(_container.css("margin-right")))
+            );
+
+        _container.css(
+            "height",
+            _win.innerHeight()
+            -
+            (parseInt(_container.css("margin-top")) + parseInt(_container.css("margin-bottom")))
+            );
+
+        var rowHeight = _container.height() / _container.attr("rownums");
+        var columnWidth = _container.width() / _container.attr("columnnums");
+
+        var elements = $(".container > .DashboardElement");
+
+        for (var i = 0; i < elements.length; i++) {
+            var $ele = $(elements[i]);
+
+            var rowIndex = $ele.attr("rowindex");
+            var columnIndex = $ele.attr("columnindex");
+            var rowSpan = $ele.attr("rowspan");
+            var columnSpan = $ele.attr("columnspan");
+
+            $ele.css("top", rowHeight * rowIndex);
+            $ele.css("left", columnWidth * columnIndex);
+            $ele.css("width", columnWidth * columnSpan);
+            $ele.css("height", rowHeight * rowSpan);
+        }
+    }
+</script>
+

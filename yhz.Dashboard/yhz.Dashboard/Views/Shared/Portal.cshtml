@@ -1,0 +1,53 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "DashBoard Portal";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <h1>
+                            Dashboard <small>Dashboard 1.0</small>
+                        </h1>
+                    </div>
+                    <div class="col-lg-4">
+                        <ul class="nav" style="float:right">
+                            <li>
+                                @Html.ActionLink("English", ViewContext.RouteData.Values["action"].ToString(), new { language = "en", culture = "us" })
+                            </li>
+                            <li>
+                                @Html.ActionLink("简体中文", ViewContext.RouteData.Values["action"].ToString(), new { language = "zh", culture = "cn" })
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav nav-tabs">
+                <li id="nav_li_data">
+                    <a href="/@ViewContext.RouteData.Values["language"]-@ViewContext.RouteData.Values["culture"]/Dashboard/DataConfig"><i class="glyphicon glyphicon-folder-close"></i>&nbsp;@PortalRes.menu_data_source</a>
+                </li>
+                <li id="nav_li_elementType">
+                    <a href="/@ViewContext.RouteData.Values["language"]-@ViewContext.RouteData.Values["culture"]/Dashboard/ElementTypeConfig"><i class="glyphicon glyphicon-apple"></i>&nbsp;@PortalRes.menu_element_type</a>
+                </li>
+                <li id="nav_li_element">
+                    <a href="/@ViewContext.RouteData.Values["language"]-@ViewContext.RouteData.Values["culture"]/Dashboard/ElementConfig"><i class="glyphicon glyphicon-yen"></i>&nbsp;@PortalRes.menu_element</a>
+                </li>
+                <li id="nav_li_dashBoard">
+                    <a href="/@ViewContext.RouteData.Values["language"]-@ViewContext.RouteData.Values["culture"]/Dashboard/DashBoardConfig"><i class="glyphicon glyphicon-object-align-right"></i>&nbsp;@PortalRes.menu_dashboard</a>
+                </li>
+                <li id="nav_li_terminal">
+                    <a href="/@ViewContext.RouteData.Values["language"]-@ViewContext.RouteData.Values["culture"]/Dashboard/TerminalInfo"><i class="glyphicon glyphicon-modal-window"></i>&nbsp;@PortalRes.menu_terminal</a>
+                </li>
+                <li id="nav_li_upload">
+                    <a href="/@ViewContext.RouteData.Values["language"]-@ViewContext.RouteData.Values["culture"]/Resource/Upload"><i class="glyphicon glyphicon-picture"></i>&nbsp;@PortalRes.menu_resource</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="contentDiv" class="row" style="margin-top:10px;">
+        @RenderBody()
+    </div>
+</div>

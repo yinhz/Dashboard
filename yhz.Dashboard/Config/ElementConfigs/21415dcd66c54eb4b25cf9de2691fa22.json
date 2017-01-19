@@ -1,0 +1,120 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashBoardElementConfig, yhz.Dashboard.Core",
+  "ZIndex": 0,
+  "Descript": "Dashboard table control test",
+  "LocElementId": null,
+  "ElementId": "21415dcd66c54eb4b25cf9de2691fa22",
+  "ElementName": "Dashboard table control test 1",
+  "RowIndex": 0,
+  "ColumnIndex": 0,
+  "RowSpan": 1,
+  "ColumnSpan": 1,
+  "TypeConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashBoardElementTypeConfig, yhz.Dashboard.Core",
+    "TypeId": "00c5f00c624d42eba8ad6b5e9a4c41d3",
+    "TypeName": "Dashboard_Table",
+    "Descript": "Dashboard table control",
+    "HtmlTemplate": "<!--Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n\t可编辑Html区域\n    已自动生成容器Div.Id 为 mainDvi_ElementId.保证全局唯一.\n\t内容自行编辑。如 <table id=\"table\" class=\"table table-responsive table-hover\"></table>\n-->\n<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  <table id=\"table\" class=\"table table-responsive\"></table>\n  <!--**********自定义编码结束**********-->\n</div>",
+    "JavaScriptTemplate": "function f_[ElementId](config) {\n    this.Config = config;\n    this.Handle = internalHandle;\n\n    var _config = this.Config;\n\n    function GetData() {\n        GetDashBoardData(config.DataId, function (json) {\n            //********** Your Code Begin **********\n\n            if (json.Table == null)\n                return;\n\n            var $tab = $(\"#mainDiv_\" + config.ElementId + \" > table\");\n\n            $tab.html(GenTableInnerHtml(json.Table, [CellHandleFunc]));\n          \n            if('[FontSize]' != '' ) { $tab.css(\"font-size\",\"[FontSize]px\"); }\n\n            if ([Bordered]) { $tab.addClass(\"table-bordered\"); }\n            if ([MouseHover]) { $tab.addClass(\"table-hover\"); }\n            if ([Condensed]) { $tab.addClass(\"table-condensed\"); }\n          \tif ([Striped]) { $tab.addClass(\"table-striped\"); }\n            \n            var headtr = $tab.find(\"thead tr\"); \n            if ([ShowTableHead]) { if ('[HeadStatus]' != '') { $(headtr[0]).addClass('[HeadStatus]'); } } \n          \telse { $(headtr[0]).css(\"display\", \"none\"); }\n\n            var pageIndex = 0;\n            var pageSize = [PageSize];\n            var pageInterval = [PageInterval];\n            var pageCount = json.Table.length / pageSize;\n\n            if(pageSize < json.Table.length){\n                if(_config.timer != null)\n                  clearTimeout(_config.timer);\n\n                var trs = $tab.find(\"tbody tr\");\n\n                var handleTable = function () {\n                    if (pageIndex >= pageCount)\n                        pageIndex = 0;\n\n                    for (var i = 0; i < json.Table.length; i++) {\n                        if (i >= pageIndex * pageSize && i < (pageIndex + 1) * pageSize)\n                            $(trs[i]).css(\"display\", \"\");\n                        else\n                            $(trs[i]).css(\"display\", \"none\");\n                    }\n                    pageIndex++;\n                }\n                \n              \thandleTable();\n              \t_config.timer = setInterval(handleTable, pageInterval);\n            }\n\n            // ********** End **********\n        });\n    }\n\n    function internalHandle() {\n        if (this.Config.IsAutoRefresh) {\n            GetData();\n            setInterval(function () { GetData() }, this.Config.Interval);\n        }\n        else {\n            GetData();\n        }\n    }\n}\n\nvar fun_[ElementId] =\n  new f_[ElementId]({ \"ElementId\": \"[ElementId]\", \"DataId\": \"[DataId]\", \"IsAutoRefresh\": [IsAutoRefresh], \"Interval\": [Interval] }).Handle();",
+    "CssTemplate": "/*Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n  可编辑样式表区域\n  建议：为了不影响全局样式\n       建议编写的样式加上限制 #mainDiv_[ElementId]\n  例如：\n      自定义超链接样式\n      #mainDiv_[ElementId] a{\n            \n      }\n */\n\n/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n/********** 自定义样式结束 **********/",
+    "CreateTime": "2016-01-20T11:03:42.7579659+08:00",
+    "ParaConfigs": [
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "660ed57f497a49478778372c0620395e",
+        "ParaName": "PageSize",
+        "ParaCode": "PageSize",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">PageSize</span>\n  <input id=\"PageSize\" value=\"10\" class=\"form-control\" type=\"text\" placeholder=\"PageSize\" />\n</div>",
+        "Value": "4"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "9538f352fece4380b924c7c22da74285",
+        "ParaName": "PageInterval",
+        "ParaCode": "PageInterval",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">PageInterval</span>\n  <input id=\"PageInterval\" value=\"5000\" class=\"form-control\" type=\"text\" placeholder=\"PageInterval\" />\n</div>",
+        "Value": "2000"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "2ea8e27130aa434bbb45a51b6c379ab6",
+        "ParaName": "Bordered",
+        "ParaCode": "Bordered",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Bordered</span>\n  <select id=\"Bordered\" class=\"form-control\">\n    <option value=\"true\">true</option>\n    <option value=\"false\">false</option>\n  </select>\n</div>",
+        "Value": "true"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "d688a48961a040d5ad891d086ed28734",
+        "ParaName": "MouseHover",
+        "ParaCode": "MouseHover",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">MouseHover</span>\n  <select id=\"MouseHover\" class=\"form-control\">\n    <option value=\"true\">true</option>\n    <option value=\"false\">false</option>\n  </select>\n</div>",
+        "Value": "true"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "f82ffc33b53d4e44bfef648e62fdef95",
+        "ParaName": "Condensed",
+        "ParaCode": "Condensed",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Condensed</span>\n  <select id=\"Condensed\" class=\"form-control\">\n    <option value=\"false\">false</option>\n    <option value=\"true\">true</option>\n  </select>\n</div>",
+        "Value": "false"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "0b735fcfe8cd48d095ba2de69e48df34",
+        "ParaName": "HeadStatus",
+        "ParaCode": "HeadStatus",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">HeadStatus</span>\n  <select id=\"HeadStatus\" class=\"form-control\">\n    <option value=\"\">None</option>\n    <option value=\"active\">Active</option>\n    <option value=\"success\">Success</option>\n    <option value=\"warning\">Warning</option>\n    <option value=\"danger\">Danger</option>\n    <option value=\"info\">Info</option>\n  </select>\n</div>",
+        "Value": "success"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "acf2ce1542fe40088b765579c98047fa",
+        "ParaName": "ShowTableHead",
+        "ParaCode": "ShowTableHead",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">ShowTableHead</span>\n  <select id=\"ShowTableHead\" class=\"form-control\">\n    <option value=\"true\">true</option>\n    <option value=\"false\">false</option>\n  </select>\n</div>",
+        "Value": "true"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "cf5a7e9cc5f54ea686e24e7082270f6a",
+        "ParaName": "Striped",
+        "ParaCode": "Striped",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Striped</span>\n  <select id=\"Striped\" class=\"form-control\">\n    <option value=\"true\">true</option>\n    <option value=\"false\">false</option>\n  </select>\n</div>",
+        "Value": "true"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "927339c996964cd685cd3da0b116328d",
+        "ParaName": "FontSize",
+        "ParaCode": "FontSize",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">FontSize</span>\n  <input id=\"FontSize\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"fontsize,it can be empty\" />\n</div>",
+        "Value": ""
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "19d57739bb944333b322eaab76be0f75",
+        "ParaName": "CellHandleFunc",
+        "ParaCode": "CellHandleFunc",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">CellHandleFunc</span>\n  <textarea style=\"width:670px;height:400px;\" id=\"CellHandleFunc\" value=\"function(tableData,rowIndex,row,columnName,cellValue,columnIndex){return cellValue;}\" class=\"form-control\" type=\"text\" placeholder=\"CellHandleFunc\" />\n</div>",
+        "Value": "function (tableData, rowIndex, row, columnName, cellValue, columnIndex) {\n\n    if (columnName == '箱发库存' && $.isNumeric(cellValue) && cellValue > 25) {\n        return \"<span style='color:red;'>\" + cellValue + \"</span>\";\n    }\n\n    if (columnName == '型号' && rowIndex != tableData.length - 1) {\n        var replace_val = '';\n        if (cellValue.length > 10) {\n            replace_val = cellValue.substring(0, 10) + '...';\n        }\n        return \"<a href='/DashBoard/DashboardPlayer?theme=\" + m_theme + \"&DashboardId=6df260ba573f49e7b6a0df5e6ec6046b&paras={\\\"Model\\\":\\\"\" + replace_val + \"\\\"}'>\" + cellValue + \"</a>\";\n    }\n    return cellValue;\n}"
+      }
+    ]
+  },
+  "DataConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashBoardDataConfig, yhz.Dashboard.Core",
+    "DataId": "dd86b86a36b34bc79497e7bd4783d26d",
+    "DataName": "Dashboard_Test_Data",
+    "DataBaseName": "SitMesDb_SqlServer",
+    "IsAutoRefresh": true,
+    "Interval": 7000.0,
+    "Sql": "if '@Model' = 'BCD-206D11D-MM61'\n\tSELECT '1' as '序号','BCD-206D11D-MM61' AS '型号','2' AS '箱发模具(套)','22' AS '箱发库存','2' AS '门发模具(套)','115' AS '门发库存'\nelse\nSELECT '1' as '序号','BCD-206D11D-MM61' AS '型号','2' AS '箱发模具(套)','22' AS '箱发库存','2' AS '门发模具(套)','115' AS '门发库存'\nUNION\nSELECT '2' as '序号','BCD-208FG/D-LO61' AS '型号','4' AS '箱发模具(套)','26' AS '箱发库存','2' AS '门发模具(套)','115' AS '门发库存'\nUNION\nSELECT '3' as '序号','BCD-208FG/D-LO61,BCD-208FG/D-LO61' AS '型号','4' AS '箱发模具(套)','26' AS '箱发库存','2' AS '门发模具(套)','115' AS '门发库存'\nUNION\nSELECT '4' as '序号','BCD-208FG/D-LO61' AS '型号','4' AS '箱发模具(套)','26' AS '箱发库存','2' AS '门发模具(套)','115' AS '门发库存'\nUNION\nSELECT '5' as '序号','BCD-208FG/D-LO61' AS '型号','4' AS '箱发模具(套)','26' AS '箱发库存','2' AS '门发模具(套)','115' AS '门发库存'\nUNION ALL\nSELECT '',\n  '' as '型号',\n  '',\n  '<span style=\"color: #FFFF00\">275</span>' ,\n  '',\n  '<span style=\"color: #FFFF00\">535</span>'",
+    "PreSql": "",
+    "CreateTime": "2016-01-20T17:58:06.1037844+08:00"
+  },
+  "HtmlTemplate": "<!--Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n\t可编辑Html区域\n    已自动生成容器Div.Id 为 mainDvi_ElementId.保证全局唯一.\n\t内容自行编辑。如 <table id=\"table\" class=\"table table-responsive table-hover\"></table>\n-->\n<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  <table id=\"table\" class=\"table table-responsive\"></table>\n  <!--**********自定义编码结束**********-->\n</div>",
+  "JavaScriptTemplate": "function f_[ElementId](config) {\n    this.Config = config;\n    this.Handle = internalHandle;\n\n    var _config = this.Config;\n\n    function GetData() {\n        GetDashBoardData(config.DataId, function (json) {\n            //********** Your Code Begin **********\n\n            if (json.Table == null)\n                return;\n\n            var $tab = $(\"#mainDiv_\" + config.ElementId + \" > table\");\n\n            $tab.html(GenTableInnerHtml(json.Table, function (tableData, rowIndex, row, columnName, cellValue, columnIndex) {\n\n    if (columnName == '箱发库存' && $.isNumeric(cellValue) && cellValue > 25) {\n        return \"<span style='color:red;'>\" + cellValue + \"</span>\";\n    }\n\n    if (columnName == '型号' && rowIndex != tableData.length - 1) {\n        var replace_val = '';\n        if (cellValue.length > 10) {\n            replace_val = cellValue.substring(0, 10) + '...';\n        }\n        return \"<a href='/DashBoard/DashboardPlayer?theme=\" + m_theme + \"&DashboardId=6df260ba573f49e7b6a0df5e6ec6046b&paras={\\\"Model\\\":\\\"\" + replace_val + \"\\\"}'>\" + cellValue + \"</a>\";\n    }\n    return cellValue;\n}));\n          \n            if('' != '' ) { $tab.css(\"font-size\",\"px\"); }\n\n            if (true) { $tab.addClass(\"table-bordered\"); }\n            if (true) { $tab.addClass(\"table-hover\"); }\n            if (false) { $tab.addClass(\"table-condensed\"); }\n          \tif (true) { $tab.addClass(\"table-striped\"); }\n            \n            var headtr = $tab.find(\"thead tr\"); \n            if (true) { if ('success' != '') { $(headtr[0]).addClass('success'); } } \n          \telse { $(headtr[0]).css(\"display\", \"none\"); }\n\n            var pageIndex = 0;\n            var pageSize = 4;\n            var pageInterval = 2000;\n            var pageCount = json.Table.length / pageSize;\n\n            if(pageSize < json.Table.length){\n                if(_config.timer != null)\n                  clearTimeout(_config.timer);\n\n                var trs = $tab.find(\"tbody tr\");\n\n                var handleTable = function () {\n                    if (pageIndex >= pageCount)\n                        pageIndex = 0;\n\n                    for (var i = 0; i < json.Table.length; i++) {\n                        if (i >= pageIndex * pageSize && i < (pageIndex + 1) * pageSize)\n                            $(trs[i]).css(\"display\", \"\");\n                        else\n                            $(trs[i]).css(\"display\", \"none\");\n                    }\n                    pageIndex++;\n                }\n                \n              \thandleTable();\n              \t_config.timer = setInterval(handleTable, pageInterval);\n            }\n\n            // ********** End **********\n        });\n    }\n\n    function internalHandle() {\n        if (this.Config.IsAutoRefresh) {\n            GetData();\n            setInterval(function () { GetData() }, this.Config.Interval);\n        }\n        else {\n            GetData();\n        }\n    }\n}\n\nvar fun_[ElementId] =\n  new f_[ElementId]({ \"ElementId\": \"[ElementId]\", \"DataId\": \"[DataId]\", \"IsAutoRefresh\": [IsAutoRefresh], \"Interval\": [Interval] }).Handle();",
+  "CssTemplate": "/*Siemens DashBoard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n  可编辑样式表区域\n  建议：为了不影响全局样式\n       建议编写的样式加上限制 #mainDiv_[ElementId]\n  例如：\n      自定义超链接样式\n      #mainDiv_[ElementId] a{\n            \n      }\n */\n\n/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n/********** 自定义样式结束 **********/",
+  "RenderHtml": "",
+  "CreateTime": "2016-01-26T11:49:09.024718+08:00"
+}

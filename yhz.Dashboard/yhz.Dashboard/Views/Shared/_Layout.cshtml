@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang ="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+        <title>@ViewBag.Title</title>
+
+        @*网站风格由以下2个文件组成*@
+        <link rel="stylesheet" type="text/css" href="~/Content/themes/default/bootstrap.css" />
+
+        <script src="~/Scripts/jquery-2.1.4.js"></script>
+
+        <script src="~/Scripts/layer/layer.js"></script>
+
+        <script src="~/Scripts/highcharts.js"></script>
+        @*<script src="http://code.highcharts.com/highcharts.js"></script>*@
+
+        <script src="~/Scripts/dashboard.js"></script>
+
+        <script src="~/Scripts/bootstrap.js"></script>
+
+
+        @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")*@
+
+        <style>
+            /* 半透明的遮罩层 */
+            #overlay {
+                background: #000;
+                filter: alpha(opacity=50); /* IE的透明度 */
+                opacity: 0.5;  /* 透明度 */
+                display: none;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                z-index: 100; /* 此处的图层要大于页面 */
+                display:none;
+            }
+        </style>
+
+        <script>
+
+            /* 显示遮罩层 */
+            function showOverlay() {
+                $("#overlay").height(pageHeight());
+                $("#overlay").width(pageWidth());
+
+                $("#overlay").css("display", "block");
+                // fadeTo第一个参数为速度，第二个为透明度
+                // 多重方式控制透明度，保证兼容性，但也带来修改麻烦的问题
+                //$("#overlay").fadeTo(200, 0.5);
+            }
+
+            /* 隐藏覆盖层 */
+            function hideOverlay() {
+                $("#overlay").fadeOut(200);
+            }
+
+            /* 当前页面高度 */
+            function pageHeight() {
+                return document.body.scrollHeight;
+            }
+
+            /* 当前页面宽度 */
+            function pageWidth() {
+                return document.body.scrollWidth;
+            }
+        </script>
+
+        @RenderSection("scripts", required: false)
+
+    </head>
+    <body>
+        <div id="overlay"></div>
+
+        @RenderBody()
+    </body>
+</html>

@@ -1,0 +1,88 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashBoardElementConfig, yhz.Dashboard.Core",
+  "ZIndex": 0,
+  "Descript": "Label",
+  "LocElementId": null,
+  "ElementId": "eb29d7cf66a546f188514353e3165da1",
+  "ElementName": "Dashboard Label Test",
+  "RowIndex": 0,
+  "ColumnIndex": 0,
+  "RowSpan": 1,
+  "ColumnSpan": 1,
+  "TypeConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashBoardElementTypeConfig, yhz.Dashboard.Core",
+    "TypeId": "41c326bd8b3141fabf2b6b1376f309a9",
+    "TypeName": "Dashboard_Label",
+    "Descript": "Dashboard Label",
+    "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  <table>\n    <tr>\n      <td align=\"[Align]\" valign=\"[Valign]\">\n  \t\t[Text]\n      </td>\n    </tr>\n  </table>\n  <!--**********自定义编码结束**********-->\n</div>",
+    "JavaScriptTemplate": "function f_[ElementId](elementId) {\n  this.ElementId = elementId;\n  \n  this.Handle = internalHandle;\n  \n  function internalHandle() {\n    var $label = $(\"#mainDiv_\" + this.ElementId);\n    \n    if('[FontSize]' != '' ) { $label.css(\"font-size\",\"[FontSize]px\"); }\n    if('[FontColor]' != '' ) { $label.css(\"color\",\"[FontColor]\"); }\n    if('[FontWeight]' != '' ) { $label.css(\"font-weight\",\"[FontWeight]\"); }\n  }\n}\n\n// 实例化处理方法 并调用其 Hanlde 方法\nvar fun_[ElementId] = new f_[ElementId](\"[ElementId]\").Handle();",
+    "CssTemplate": "#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n#mainDiv_[ElementId] table{\n  width:100%;\n  height:100%;\n}",
+    "CreateTime": "2016-01-25T16:49:00.392093+08:00",
+    "ParaConfigs": [
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "f8acac069b82458b8558835910bce21a",
+        "ParaName": "FontSize",
+        "ParaCode": "FontSize",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">FontSize</span>\n  <input id=\"FontSize\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"fontsize,can be empty\" />\n</div>",
+        "Value": "30"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "aea3633d764043be9fe5e2a0158483df",
+        "ParaName": "FontColor",
+        "ParaCode": "FontColor",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">FontColor</span>\n  <input id=\"FontColor\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"FontColor,can be empty\" />\n</div>",
+        "Value": "red"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "6525b7dfa4d84afab97635423eb3a357",
+        "ParaName": "FontWeight",
+        "ParaCode": "FontWeight",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">FontWeight</span>\n  <select id=\"FontWeight\" class=\"form-control\">\n    <option value=\"normal\">Normal</option>\n    <option value=\"bold\">Bold</option>\n  </select>\n</div>",
+        "Value": "bold"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "8b31821d2c894f758be5f6901dd70f06",
+        "ParaName": "Align",
+        "ParaCode": "Align",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Align</span>\n  <select id=\"Align\" class=\"form-control\">\n    <option value=\"center\">Center</option>\n    <option value=\"left\">Left</option>\n    <option value=\"right\">Right</option>\n  </select>\n</div>",
+        "Value": "center"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "6a9ea9771c1540c1976b1ac0a74031bc",
+        "ParaName": "Valign",
+        "ParaCode": "Valign",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Valign</span>\n  <select id=\"Valign\" class=\"form-control\">\n    <option value=\"middle\">Middle</option>\n    <option value=\"top\">Top</option>\n    <option value=\"bottom\">Bottom</option>\n  </select>\n</div>",
+        "Value": "middle"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "3d972441d7a241919d6f929f110023a0",
+        "ParaName": "Text",
+        "ParaCode": "Text",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Text</span>\n  <input id=\"Text\" value=\"Input Text\" class=\"form-control\" type=\"text\" placeholder=\"Text\" />\n</div>",
+        "Value": "蒙牛能源管理系统"
+      }
+    ]
+  },
+  "DataConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashBoardDataConfig, yhz.Dashboard.Core",
+    "DataId": "",
+    "DataName": "",
+    "DataBaseName": "",
+    "IsAutoRefresh": false,
+    "Interval": 1000.0,
+    "Sql": "",
+    "PreSql": "",
+    "CreateTime": "2016-01-25T17:13:01.6692063+08:00"
+  },
+  "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  <table>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n  \t\t蒙牛能源管理系统\n      </td>\n    </tr>\n  </table>\n  <!--**********自定义编码结束**********-->\n</div>",
+  "JavaScriptTemplate": "function f_[ElementId](elementId) {\n  this.ElementId = elementId;\n  \n  this.Handle = internalHandle;\n  \n  function internalHandle() {\n    var $label = $(\"#mainDiv_\" + this.ElementId);\n    \n    if('30' != '' ) { $label.css(\"font-size\",\"30px\"); }\n    if('red' != '' ) { $label.css(\"color\",\"red\"); }\n    if('bold' != '' ) { $label.css(\"font-weight\",\"bold\"); }\n  }\n}\n\n// 实例化处理方法 并调用其 Hanlde 方法\nvar fun_[ElementId] = new f_[ElementId](\"[ElementId]\").Handle();",
+  "CssTemplate": "#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n#mainDiv_[ElementId] table{\n  width:100%;\n  height:100%;\n}",
+  "RenderHtml": "",
+  "CreateTime": "2016-03-27T02:58:51.0082222+08:00"
+}

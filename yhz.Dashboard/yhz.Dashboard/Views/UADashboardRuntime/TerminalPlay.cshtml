@@ -1,0 +1,224 @@
+﻿@using yhz.Dashboard.Core.ConfigEx
+
+@{
+    Layout = null;
+    ViewBag.Title = "Siemens Dashboard";
+}
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>@ViewBag.Title</title>
+    
+    @*网站风格(bootstrap)、这里要根据 看板配置的主题进行加载*@
+
+    @if (ViewBag.TerminalDashboard != null
+        && !string.IsNullOrEmpty(ViewBag.Theme))
+    {
+        <link rel="stylesheet" type="text/css" href="~/Content/themes/@ViewBag.Theme/bootstrap.css" />
+    }
+
+    @*<link rel="stylesheet" type="text/css" href="~/Content/themes/default/bootstrap.css" />*@
+
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/uartdashboard.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/highcharts.js"></script>
+    <script type="text/javascript" src="~/Scripts/highchartshelper.js"></script>
+
+    @*网站风格(highcharts)、这里要根据 看板配置的主题进行加载*@
+    @if (ViewBag.TerminalDashboard != null
+        && !string.IsNullOrEmpty(ViewBag.Theme) && ViewBag.Theme != "default")
+    {
+        <script type="text/javascript" src="~/Content/themes/@ViewBag.Theme/highcharts-theme.js"></script>
+    }
+
+    <style>
+        html {
+            padding:0;
+            margin:0;
+            width:100%;
+            height:100%;
+        }
+
+        body {
+            margin:0;
+            width:100%;
+            height:100%;
+            padding:0;
+        }
+
+        .maindiv {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            /*border: 10px solid blue;*/
+        }
+
+        .DashBoardElement {
+            position: absolute;
+            display: block;
+            overflow: hidden;
+            padding:10px;
+            /*border: 5px solid red;*/
+        }
+
+    </style>
+
+</head>
+<body>
+    <script>
+        m_paras = "@HttpUtility.UrlEncode(ViewBag.ParameterJson == null ? "" : ViewBag.ParameterJson, System.Text.Encoding.UTF8)";
+        m_theme = "@ViewBag.Theme";
+    </script>
+
+    @{
+        if (ViewBag.Terminal == null || ViewBag.Terminal.Forbidden.Value)
+        {
+            <h3>Your terminal has been disabled,please contact the admin.</h3>
+        }
+        else if (ViewBag.TerminalDashboard == null)
+        {
+            <h3>Please contact the system admin to conifg this terminal.there is no Dashboard.</h3>
+        }
+        else
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                string guid = System.Guid.NewGuid().ToString().Replace("-", "");
+
+                if (!string.IsNullOrEmpty(@ViewBag.TerminalDashboard.BackgroundImage))
+                {
+                    <style>
+                    #_@guid {
+                        background: url(@ViewBag.TerminalDashboard.BackgroundImage);
+                        background-size: 100% 100%;
+                    }
+                    </style>
+                }
+                
+                <div class="maindiv" 
+                     id="_@guid" 
+                     style="width:100%;height:100%" 
+                     rownums="@ViewBag.TerminalDashboard.RowNumber" 
+                     columnnums="@ViewBag.TerminalDashboard.ColumnNumber">
+
+                    @foreach (var dashboardElement in ViewBag.TerminalDashboard.DashboardElements)
+                    {
+                        //id="dbe_@element.ElementId"
+                        <div class="DashBoardElement"
+                             style="z-index:@dashboardElement.ZIndex"
+                             rowindex="@dashboardElement.RowIndex"
+                             columnindex="@dashboardElement.ColumnIndex"
+                             rowspan="@dashboardElement.RowSpan"
+                             columnspan="@dashboardElement.ColumnSpan">
+                            <style>
+                            @Html.Raw(dashboardElement.Css)
+                            </style>
+
+                            @Html.Raw(dashboardElement.Html)
+
+                            <script>
+                                @Html.Raw(dashboardElement.JavaScript)
+                            </script>
+                        </div>
+                    }
+
+                </div>
+            }
+        }
+}
+
+    <script>
+
+        function SetSize() {
+
+            var _win = $("html");
+
+            // 设置布局Div大小
+            var _mainDiv = $(".maindiv");
+
+            _mainDiv.css(
+                "width",
+                _win.innerWidth()
+                -
+                (parseInt(_mainDiv.css("margin-left")) + parseInt(_mainDiv.css("margin-right")))
+                );
+
+            _mainDiv.css(
+                "height",
+                _win.innerHeight()
+                -
+                (parseInt(_mainDiv.css("margin-top")) + parseInt(_mainDiv.css("margin-bottom")))
+                );
+
+            var rowHeight = _mainDiv.height() / _mainDiv.attr("rownums");
+            var columnWidth = _mainDiv.width() / _mainDiv.attr("columnnums");
+
+            var elements = $(".maindiv > .DashBoardElement");
+
+            for (var i = 0; i < elements.length; i++) {
+                var $ele = $(elements[i]);
+
+                var rowIndex = $ele.attr("rowindex");
+                var columnIndex = $ele.attr("columnindex");
+                var rowSpan = $ele.attr("rowspan");
+                var columnSpan = $ele.attr("columnspan");
+
+                $ele.css("top", rowHeight * rowIndex);
+                $ele.css("left", columnWidth * columnIndex);
+                $ele.css("width", columnWidth * columnSpan);
+                $ele.css("height", rowHeight * rowSpan);
+            }
+        }
+
+        SetSize();
+
+        $(document).ready(
+            //开始更新检查
+            function () {
+                setInterval(
+                    function () {
+                        $.getJSON(
+                          "/UADashboardRuntime/IsRefreshTerminal?terminalId=@ViewBag.Terminal.Identification&lastEditTime=@(((DateTime)ViewBag.Terminal["LastUpdatedOn"]).ToString("yyyy-MM-dd HH:mm:ss.fffffff"))",
+                              { dataType: "json" },
+                              function (json) {
+                                  if (json) {
+                                      window.location.reload(true);
+                                  }
+                              });
+                    },
+                        2000);
+
+                if(@ViewBag.DashboardCount > 1)
+                {
+                    setInterval(
+                        function () {
+                            window.location.href = "/UADashboardRuntime/TerminalPlay?terminalId=@ViewBag.Terminal.Identification&index=@(ViewBag.Index + 1)";
+                        },
+                        @ViewBag.TerminalDashboard.PlayCycle * 1000);
+                }
+                }
+                );
+
+            $(document).ready(function (e) {
+                //窗口大小改变事件
+                $(window).resize(function (e1) {
+                    SetSize();
+                });
+
+                $(document).resize(function (e2) {
+                    SetSize();
+                });
+            });
+
+    </script>
+</body>
+</html>

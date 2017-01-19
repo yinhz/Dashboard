@@ -1,0 +1,319 @@
+﻿@{
+    Layout = "~/Views/Shared/Portal.cshtml";
+}
+
+<div class="col-lg-12 partPage">
+
+    <div id="listArea" class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-lg-8">
+                    <i class="glyphicon glyphicon-list-alt"></i> @ElementTypeRes.list_title
+                </div>
+                <div class="col-lg-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.data_support</span>
+                        <select id="s_widthData" class="form-control">
+                            <option value="true">Y</option>
+                            <option value="false">N</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-1">
+                    <button class="btn btn-danger" onclick="addConfig();"><i class="glyphicon glyphicon-plus"></i> @CommonRes.Add</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+
+            <table id="maintable" class="table table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            @ElementTypeRes.model_no
+                        </th>
+                        <th>
+                            @ElementTypeRes.model_name
+                        </th>
+                        <th>
+                            @ElementTypeRes.model_des
+                        </th>
+                        <th>
+                            @ElementTypeRes.model_creation_time
+                        </th>
+                        <th>
+                            @CommonRes.Operation
+                        </th>
+                    </tr>
+                </thead>
+                @{
+                    int rowNum = 0;
+
+                    foreach (var config in yhz.Dashboard.Core.DashboardRepository.ElementTypeConfigs)
+                    {
+                        <tr>
+                            <td>@(++rowNum)</td>
+                            <td>@config.TypeName</td>
+                            <td>@config.Descript</td>
+                            <td>@config.CreateTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                            <td>
+                                <input id="@config.TypeId" type="hidden" value="@yhz.Dashboard.Common.ObjectHelper.SerializeObject(config)" />
+                                <a role="button" href="#" onclick="showEditor($.parseJSON($('#@config.TypeId').val()), true, $(this).closest('tr'));">@CommonRes.Edit</a>
+                                <a role="button" href="#" onclick="cloneConfig('@config.TypeId',this);">@CommonRes.Duplicate</a>
+                                <a role="button" href="#" onclick="deleteConfig('@config.TypeId',this);">@CommonRes.Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+
+
+
+            @{
+                if (rowNum > 0)
+                {
+                    <script>
+                        // 页面加载完成 默认编辑第一行
+                        $(document).ready(function () {
+                            showEditor($.parseJSON($('#@yhz.Dashboard.Core.DashboardRepository.ElementTypeConfigs[0].TypeId').val()), false, $("#maintable tbody tr:eq(0)"));
+                        });
+                    </script>
+                }
+            }
+
+        </div>
+    </div>
+
+    <div id="editArea" class="panel panel-default" style="display:block">
+
+        @*<link rel=stylesheet href="~/Scripts/CodeMirror-master/doc/docs.css">*@
+        <link rel="stylesheet" href="~/Scripts/CodeMirror-master/lib/codemirror.css">
+
+        <link rel="stylesheet" href="~/Scripts/CodeMirror-master/addon/hint/show-hint.css">
+        <link rel="stylesheet" href="~/Scripts/CodeMirror-master/addon/display/fullscreen.css">
+
+        <script src="~/Scripts/CodeMirror-master/lib/codemirror.js"></script>
+
+        <script src="~/Scripts/CodeMirror-master/addon/selection/selection-pointer.js"></script>
+
+        <script src="~/Scripts/CodeMirror-master/mode/css/css.js"></script>
+        <script src="~/Scripts/CodeMirror-master/addon/hint/css-hint.js"></script>
+        <script src="~/Scripts/CodeMirror-master/addon/hint/sql-hint.js"></script>
+
+        @*<script src="~/Scripts/CodeMirror-master/addon/edit/matchbrackets.js"></script>*@
+        <script src="~/Scripts/CodeMirror-master/addon/comment/continuecomment.js"></script>
+        <script src="~/Scripts/CodeMirror-master/addon/comment/comment.js"></script>
+        <script src="~/Scripts/CodeMirror-master/mode/javascript/javascript.js"></script>
+
+        <script src="~/Scripts/CodeMirror-master/mode/xml/xml.js"></script>
+        <script src="~/Scripts/CodeMirror-master/addon/display/fullscreen.js"></script>
+
+        <script src="~/Scripts/CodeMirror-master/mode/vbscript/vbscript.js"></script>
+        <script src="~/Scripts/CodeMirror-master/mode/htmlmixed/htmlmixed.js"></script>
+
+        <style>
+            textarea {
+                width: 100%;
+                height: 100%;
+            }
+        </style>
+
+        <div class="panel-heading">
+            <i class="glyphicon glyphicon-edit"></i> @ElementTypeRes.list_title
+            <button style="float:right" class="btn btn-success" type="button" onclick="saveConfig();"><i class="glyphicon glyphicon-ok"></i> @CommonRes.Save</button>
+        </div>
+        <div id="editDataDiv" class="panel-body">
+            <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.model_name</span>
+                            <input id="edit_i_db_name" class="form-control" type="text" placeholder="@ElementTypeRes.model_name" />
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.model_des</span>
+                            <input id="edit_i_db_des" class="form-control" type="text" placeholder="@ElementTypeRes.model_des" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" style="margin-top:5px;">
+                <div id="edit_para_area" class="panel panel-default">
+                    <div class="panel-heading">
+                        @ElementTypeRes.para_edit
+                        @*参数编辑（参数使用说明，在 html,css,js 脚本中编写 [ParaCode] 即可）*@
+                    </div>
+                    <div id="editDataDiv" class="panel-body">
+
+                        <input id="pararowid" value="" type="hidden" />
+
+                        <div class="row">
+                            <div class="col-md-6 column">
+                                <table id="para_table" style="word-break:break-all" class="table table-striped table-hover"></table>
+                            </div>
+                            <div class="col-md-6 column">
+                                <div class="row">
+                                    <div class="col-md-4 column">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.para_name</span>
+                                            <input type="text" id="i_para_name" class="form-control" placeholder="@ElementTypeRes.para_name" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 column">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.para_code</span>
+                                            <input type="text" id="i_para_code" class="form-control" placeholder="@ElementTypeRes.para_code" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 column">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.default_value</span>
+                                            <input type="text" id="i_para_value" class="form-control" placeholder="@ElementTypeRes.default_value" aria-describedby="basic-addon1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:10px;">
+                                    <div class="col-md-12 column">
+                                        <div class="panel panel-default">
+                                            <div class="panel-heading">
+                                                @ElementTypeRes.para_script
+                                                <div class="btn-group" style="float:right" role="group" aria-label="...">
+                                                    <button id="btn_para_clear" type="button" class="btn btn-default">None</button>
+                                                    <button id="btn_para_input" type="button" class="btn btn-default">Input</button>
+                                                    <button id="btn_para_select" type="button" class="btn btn-default">Select</button>
+                                                    <button id="btn_para_area" type="button" class="btn btn-default">TextArea</button>
+                                                </div>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div style="padding:5px;border:1px solid #ddd;">
+                                                    <textarea wrap="hard" id="edit_para_html"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-danger" onclick="addParaConfig();">@CommonRes.Add</button>
+                                        <button class="btn btn-danger" onclick="saveParaConfig();">@CommonRes.Save</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-12" style="margin-top:5px;">
+                    
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Html
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding:5px;border:1px solid #ddd;">
+                                <textarea wrap="hard" id="edit_area_html"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Css
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding:5px;border:1px solid #ddd;">
+                                <textarea wrap="hard" id="edit_area_css"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            JavaScript
+                        </div>
+                        <div class="panel-body">
+                            <div style="padding:5px;border:1px solid #ddd;">
+                                <textarea wrap="hard" id="edit_area_javascript"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div class="col-lg-12">
+                <div class="row" style="margin-top:5px;">
+                        @*<div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.preview_identification</span>
+                                <input id="para_ElementId" class="form-control" type="text" placeholder="@ElementTypeRes.preview_identification" />
+                            </div>
+                        </div>*@
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.preview_data_config</span>
+                                <select id="para_DataId" class="form-control">
+                                    <option value="">None</option>
+                                    @{
+                                        foreach (var dc in yhz.Dashboard.Core.DashboardRepository.DataConfigs)
+                                        {
+                                            <option value="@dc.DataId">@dc.DataName</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        @*<div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.preview_auto_refresh</span>
+                                <select id="para_IsAutoRefresh" class="form-control">
+                                    <option value="false">N</option>
+                                    <option value="true">Y</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">@ElementTypeRes.preview_interval</span>
+                                <input id="para_Interval" class="form-control" type="text" placeholder="@ElementTypeRes.preview_interval" value="1000" />
+                            </div>
+                        </div>*@
+                        <div class="col-lg-5">
+                            <div class="input-group">
+                                <span class="input-group-addon" id="basic-addon1">
+                                    @ElementTypeRes.preview_paras
+                                </span>
+                                <input id="para_Paras" class="form-control" type="text" placeholder="@ElementTypeRes.preview_paras" />
+                            </div>
+                            @*<span class="input-group-addon" id="basic-addon1">@ElementTypeRes.preview_terminal</span>
+                                <select id="para_terminalId" class="form-control">
+                                    <option value="">None</option>
+                                    @{
+                                        foreach (var ti in yhz.Dashboard.Core.DashboardRepository.TerminalInfos)
+                                        {
+                                            <option value="@ti.TerminalId">@ti.TerminalName</option>
+                                        }
+                                    }
+                                </select>*@
+                        </div>
+                        <div class="col-lg-2">
+                            <button class="btn btn-warning" type="button" onclick="preViewConfig();"><i class="glyphicon glyphicon-zoom-in"></i> @ElementTypeRes.preview</button>
+                        </div>
+                    </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="pareViewArea" class="panel panel-default" style="display:block">
+        <div class="panel-heading">
+            <i class="glyphicon glyphicon-facetime-video"></i> @ElementTypeRes.preview
+        </div>
+        <div id="preViewDiv1" class="panel-body">
+            <form id="form_frame" style="display:none" action="/Dashboard/EleTypePreView" target="PreViewIFrame" method="post">
+                <input type="text" id="input_configjson" name="configJson" />
+                <input type="text" id="input_dataid" name="dataId" />
+                <input type="text" id="input_paras" name="paras" />
+            </form>
+            <iframe id="preViewIFrame" name="PreViewIFrame" style="width:100%;height:500px;"></iframe>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/views/dashboard/elementtypeconfig.js" type="text/javascript"></script>

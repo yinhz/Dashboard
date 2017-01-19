@@ -1,0 +1,91 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardConfig, yhz.Dashboard.Core",
+  "DashboardId": "223090b460c449fe82ba9ca4a0ff0811",
+  "DashboardName": "Dashboard_3",
+  "Descript": "Dashboard_3",
+  "RowNums": 2,
+  "ColumnNums": 1,
+  "ElementConfigs": [
+    {
+      "$type": "yhz.Dashboard.Core.Config.DashboardElementConfig, yhz.Dashboard.Core",
+      "ZIndex": 0,
+      "Descript": "",
+      "LocElementId": null,
+      "ElementId": "1bf455811669475ab312e7bfa76d94cc",
+      "ElementName": "Dashboard table control test",
+      "RowIndex": 0,
+      "ColumnIndex": 0,
+      "RowSpan": 1,
+      "ColumnSpan": 1,
+      "TypeConfig": {
+        "$type": "yhz.Dashboard.Core.Config.DashboardElementTypeConfig, yhz.Dashboard.Core",
+        "TypeId": "3c25c4e708e5481ba1d0217ee468a532",
+        "TypeName": "",
+        "Descript": "",
+        "HtmlTemplate": "",
+        "JavaScriptTemplate": "",
+        "CssTemplate": "",
+        "CreateTime": "2016-01-26T11:44:39.2806096+08:00",
+        "ParaConfigs": []
+      },
+      "DataConfig": {
+        "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+        "DataId": "267b76a8fdd54e2a9e0e546254ee7940",
+        "DataName": "",
+        "DataBaseName": "",
+        "IsAutoRefresh": false,
+        "Interval": 1000.0,
+        "Sql": "",
+        "PreSql": "",
+        "CreateTime": "2016-01-26T11:44:39.2806096+08:00"
+      },
+      "HtmlTemplate": "",
+      "JavaScriptTemplate": "",
+      "CssTemplate": "",
+      "RenderHtml": "",
+      "CreateTime": "2016-01-26T11:44:39.2806096+08:00"
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.DashboardElementConfig, yhz.Dashboard.Core",
+      "ZIndex": 0,
+      "Descript": "",
+      "LocElementId": null,
+      "ElementId": "21415dcd66c54eb4b25cf9de2691fa22",
+      "ElementName": "Dashboard table control test 1",
+      "RowIndex": 1,
+      "ColumnIndex": 0,
+      "RowSpan": 1,
+      "ColumnSpan": 1,
+      "TypeConfig": {
+        "$type": "yhz.Dashboard.Core.Config.DashboardElementTypeConfig, yhz.Dashboard.Core",
+        "TypeId": "b45ab74074144080bfd80fc6d83912dc",
+        "TypeName": "",
+        "Descript": "",
+        "HtmlTemplate": "",
+        "JavaScriptTemplate": "",
+        "CssTemplate": "",
+        "CreateTime": "2016-01-26T11:44:39.2806096+08:00",
+        "ParaConfigs": []
+      },
+      "DataConfig": {
+        "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+        "DataId": "d1f20b98fa474d6497179965ac5a8faa",
+        "DataName": "",
+        "DataBaseName": "",
+        "IsAutoRefresh": false,
+        "Interval": 1000.0,
+        "Sql": "",
+        "PreSql": "",
+        "CreateTime": "2016-01-26T11:44:39.2806096+08:00"
+      },
+      "HtmlTemplate": "",
+      "JavaScriptTemplate": "",
+      "CssTemplate": "",
+      "RenderHtml": "",
+      "CreateTime": "2016-01-26T11:44:39.2806096+08:00"
+    }
+  ],
+  "QueryParas": null,
+  "BackgroundImagePath": "",
+  "CreateTime": "2016-01-26T11:43:52.8244716+08:00"
+}

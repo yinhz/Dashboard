@@ -1,0 +1,154 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Canvas Test</title>
+
+
+
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.4.js"></script>
+
+    <style>
+        html {
+            height:100%;
+            margin:0px;
+            padding:0px;
+        }
+        html body {
+            height:100%;
+            margin:0px;
+            overflow:hidden;
+        }
+        .db_layout {
+            background:#ff6a00;
+            background:#00ff90;
+        }
+        td {
+            vertical-align:middle;
+            text-align:center;
+        }
+    </style>
+
+
+</head>
+<body>
+    <table style="width:100%;height:100%;">
+        <tr>
+            <td align="center" valign="middle">
+
+                <div><p id="pp">鼠标进入画布显示鼠标位置</p></div>
+
+                <table>
+                    <tr>
+                        <td align="center" valign="middle" style="background:red;padding:10px;">
+                            <canvas id="db_layout" class="db_layout" width="1024" height="768"></canvas>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    
+
+    <script src="~/Scripts/db-canvas-layout.js"></script>
+
+    <script src="~/Scripts/highchartshelper.js"></script>
+
+    <script type="text/javascript">
+
+        var helper = new HighchartsHelper();
+        
+        var dt = [
+            { Date: "2015-05-01", Team: "甲班", Yield: 20 },
+            { Date: "2015-05-01", Team: "乙班", Yield: 30 },
+            { Date: "2015-05-02", Team: "甲班", Yield: 40 },
+            { Date: "2015-05-02", Team: "乙班", Yield: 50 }
+        ];
+
+        var xAxisCategories = helper.getxAxisCategories(dt, "Date");
+
+        var series = helper.getSeries(dt, xAxisCategories, "Date", "Team", "Yield");
+
+        var canvas = document.getElementById("db_layout");
+        var context = canvas.getContext("2d");
+        
+        //lay.prototype.aa = function () { alert("123"); };
+
+        function reRender() {
+            var dashBoardConfig =
+            {
+                RowNums: 1000,
+                ColumnNums: 1000,
+                ElementConfigs: [
+                ]
+            };
+
+            var elementCount = 10; // 自动生成的元素个数
+
+            var id = 1;
+
+            for (i = 0; i < elementCount; i++) {
+                var x = Math.random() * 500;
+                var y = Math.random() * 500;
+                var w = Math.random() * 500;
+                var h = Math.random() * 500;
+
+
+                if (x > w) {
+                    var n = w;
+                    x = w;
+                    w = n;
+                }
+                if (y > h) {
+                    var n = h;
+                    y = h;
+                    h = n;
+                }
+
+                dashBoardConfig.ElementConfigs.push({
+                    Id: id,
+                    RowIndex: x,
+                    ColumnIndex: y,
+                    RowSpan: w,
+                    ColumnSpan: h
+                });
+
+                i++;
+            }
+            context.strokeStyle = "blue";
+            context.strokeRect(
+                    50,
+                    50,
+                    canvas.width - 100,
+                    canvas.height - 100);
+
+            var json = JSON.stringify(dashBoardConfig);
+
+            var lay = new DbLayout(canvas.width, canvas.height, dashBoardConfig, context);
+
+            lay.Render();
+        }
+
+        $(document).ready(function () {
+            reRender();
+
+            //setInterval(function () { reRender(); }, 500);
+        });
+
+        //while (true) {
+        //    lay.Clear();
+        //    lay.Render();
+        //}
+
+        //lay.aa();
+
+        //lay.Clear();
+
+    </script>
+</body>
+</html>

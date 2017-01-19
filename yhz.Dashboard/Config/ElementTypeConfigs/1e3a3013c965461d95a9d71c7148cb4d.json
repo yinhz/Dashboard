@@ -1,0 +1,68 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashBoardElementTypeConfig, yhz.Dashboard.Core",
+  "TypeId": "1e3a3013c965461d95a9d71c7148cb4d",
+  "TypeName": "Dashboard_BarChart",
+  "Descript": "Dashboard bar chart",
+  "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <div id=\"container\" style=\"height:100%;width:100%\"></div>\n</div>",
+  "JavaScriptTemplate": "function f_[ElementId](config) {\n  this.Config = config;\n  \n  this.Handle = internalHandle;\n  \n  function GetData(){\n    GetDashBoardData(config.DataId,function(json){\n      // 实例化 图表辅助工具\n      var helper = new HighchartsHelper();\n\t  // 获取 X 轴数据\n      var xAxisCategories = helper.getxAxisCategories(json.Table, \"[XAxisCategory]\");\n      // 获取 系列\n      var series = helper.getSeries(json.Table, xAxisCategories, \"[XAxisCategory]\", \"[SerieColumnName]\", \"[ValueColumnName]\");\n      \n      // 为每个柱状图 增加 数值显示\n      for(s in series)\n      {\n      \tseries[s].dataLabels = {\n                enabled: true,\n                rotation: 0,\n                color: '#FFFFFF',\n                align: 'right',\n                x: 0,\n                y: 0,\n                style: {\n                    fontSize: '13px',\n                    fontFamily: 'Verdana, sans-serif',\n                    textShadow: '0 0 3px black'\n                }\n            };\n      }\n      \n      // 获取图表 tilte\n      var title = \"[Title]\";\n      // 获取图表子标题\n      var subtitle = \"[SubTitle]\";\n      // 获取图表 X 轴的标题\n      var xAxisTile = \"[XAxisTitle]\";\n      // 获取图表 Y 轴的标题\n      var yAxisTile = \"[YAxisTitle]\";\n      \n      $(\"#mainDiv_\" + config.ElementId + \" #container\").highcharts({\n        credits: {\n        \tenabled: false\n        },\n        chart: {\n            type: 'bar'\n        },\n        title: {\n            text: title\n        },\n        subtitle: {\n            text: subtitle\n        },\n        xAxis: {\n        \tcategories: xAxisCategories,\n          \ttitle: {\n            \ttext: xAxisTile\n            }\n        },\n        yAxis: {\n            min: 0,\n            title: {\n                text: yAxisTile,\n                align: 'high'\n            },\n            labels: {\n                overflow: 'justify'\n            }\n        },\n        plotOptions: {\n            bar: {\n                dataLabels: {\n                    enabled: true\n                }\n            }\n        },\n        series: series\n      });\n    });\n  }\n  \n  function internalHandle() {\n    if(this.Config.IsAutoRefresh)\n    {\n      GetData();\n      setInterval(function () { GetData() }, this.Config.Interval);\n    }\n    else\n    {\n      GetData();\n    }\n  }\n}\n\nvar fun_[ElementId] = \n  new f_[ElementId]({\"ElementId\" : \"[ElementId]\",\"DataId\": \"[DataId]\",\"IsAutoRefresh\": [IsAutoRefresh],\"Interval\": [Interval]}).Handle();",
+  "CssTemplate": "#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}",
+  "CreateTime": "2016-01-26T11:16:05.0979676+08:00",
+  "ParaConfigs": [
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "5082ccc707b34a4fbfa06d1d89cd2c4f",
+      "ParaName": "XAxisCategory",
+      "ParaCode": "XAxisCategory",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">XAxisCategory</span>\n  <input id=\"XAxisCategory\" value=\"xCName\" class=\"form-control\" type=\"text\" placeholder=\"XAxisCategory\" />\n</div>",
+      "Value": "xCName"
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "ba4aa2780c6741a28d566d007ecd1b23",
+      "ParaName": "SerieColumnName",
+      "ParaCode": "SerieColumnName",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">SerieColumnName</span>\n  <input id=\"SerieColumnName\" value=\"serieCName\" class=\"form-control\" type=\"text\" placeholder=\"SerieColumnName\" />\n</div>",
+      "Value": "serieCName"
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "33e0cca56c81459684ef700b42abc48c",
+      "ParaName": "ValueColumnName",
+      "ParaCode": "ValueColumnName",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">ValueColumnName</span>\n  <input id=\"ValueColumnName\" value=\"valueCName\" class=\"form-control\" type=\"text\" placeholder=\"ValueColumnName\" />\n</div>",
+      "Value": "valueCName"
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "c85dcbcdc78f48ca8cda106f135c1386",
+      "ParaName": "Title",
+      "ParaCode": "Title",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Title</span>\n  <input id=\"Title\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"Title,can be empty\" />\n</div>",
+      "Value": ""
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "1f95f1a0fbd34db9b79fabcfd7047f7b",
+      "ParaName": "SubTitle",
+      "ParaCode": "SubTitle",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">SubTitle</span>\n  <input id=\"SubTitle\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"SubTitle,can be empty\" />\n</div>",
+      "Value": ""
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "96400a37379142cb9e749db571fd3083",
+      "ParaName": "XAxisTitle",
+      "ParaCode": "XAxisTitle",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">XAxisTitle</span>\n  <input id=\"XAxisTitle\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"XAxisTitle,can be empty\" />\n</div>",
+      "Value": ""
+    },
+    {
+      "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+      "ParaId": "5b3d11a11a624b6f8dfb18666d8e7730",
+      "ParaName": "YAxisTitle",
+      "ParaCode": "YAxisTitle",
+      "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">YAxisTitle</span>\n  <input id=\"YAxisTitle\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"YAxisTitle,can be empty\" />\n</div>",
+      "Value": ""
+    }
+  ]
+}

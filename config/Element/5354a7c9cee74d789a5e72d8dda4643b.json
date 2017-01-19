@@ -1,0 +1,72 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardElementConfig, yhz.Dashboard.Core",
+  "ZIndex": 0,
+  "Descript": "Dashboard time control test",
+  "LocElementId": null,
+  "ElementId": "5354a7c9cee74d789a5e72d8dda4643b",
+  "ElementName": "Dashboard time control test",
+  "RowIndex": 0,
+  "ColumnIndex": 0,
+  "RowSpan": 1,
+  "ColumnSpan": 1,
+  "TypeConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashboardElementTypeConfig, yhz.Dashboard.Core",
+    "TypeId": "3a9c0ffa9fb04760b9c0b3d7a0c4f81c",
+    "TypeName": "Dashboard_Time",
+    "Descript": "Dashboard time control.(show current time)",
+    "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <!--**********自定义编码开始**********-->\n  <table>\n    <tr>\n      <td align=\"[Align]\" valign=\"[Valign]\">\n        <div id=\"showDate\"></div>\n      </td>\n    </tr>\n  </table>\n  <!--**********自定义编码结束**********-->\n</div>",
+    "JavaScriptTemplate": "(function () { \n  if('[FontSize]' != '')\n    $(\"#mainDiv_[ElementId] #showDate\").css(\"font-size\",\"[FontSize]px\");\n  \n  switch(\"[TimeFormat]\")\n  {\n    case \"YYYYMMDDWEEKDAY\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDWEEKDAY()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDWEEKDAY()); \n        },\n        24 * 60 * 60 * 1000); \n      break;\n    case \"YYYYMMDD\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDD()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDD()); \n        },\n        24 * 60 * 60 * 1000);\n      break;\n    case \"HHMMSS\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMMSS()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMMSS()); \n        },\n        1000); \n      break;\n    case \"HHMM\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMM()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMM()); \n        },\n        60 * 1000); \n      break;\n    case \"YYYYMMDDHHMMSS\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDHHMMSS()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDHHMMSS()); \n        },\n        1000); \n      break;\n    default:\n      break;\n  }\n}\n).call(this);",
+    "CssTemplate": "/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n\n#mainDiv_[ElementId] table{\n  width:100%;\n  height:100%;\n}\n\n#mainDiv_[ElementId] #showDate{\n  \n}\n/********** 自定义样式结束 **********/",
+    "CreateTime": "2016-01-20T17:30:19.8923191+08:00",
+    "ParaConfigs": [
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "a08782534c104a7398280449376781ab",
+        "ParaName": "TimeFormat",
+        "ParaCode": "TimeFormat",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Format</span>\n  <select id=\"TimeFormat\" class=\"form-control\">\n    <option value=\"YYYYMMDDHHMMSS\">xxxx年xx月xx日 xx点xx分xx秒</option>\n    <option value=\"HHMM\">xx点xx分</option>\n    <option value=\"HHMMSS\">xx点xx分xx秒</option>\n    <option value=\"YYYYMMDD\">xxxx年xx月xx日</option>\n    <option value=\"YYYYMMDDWEEKDAY\">xxxx年xx月xx日星期x</option>\n  </select>\n</div>",
+        "Value": "YYYYMMDDHHMMSS"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "5a4672338d2345efa7d58f9d7f1bdea5",
+        "ParaName": "Align",
+        "ParaCode": "Align",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Align</span>\n  <select id=\"Align\" class=\"form-control\">\n    <option value=\"center\">Center</option>\n    <option value=\"left\">Left</option>\n    <option value=\"right\">Right</option>\n  </select>\n</div>",
+        "Value": "center"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "f71839b82a804e10865a6973e1e5fd94",
+        "ParaName": "Valign",
+        "ParaCode": "Valign",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Valign</span>\n  <select id=\"Valign\" class=\"form-control\">\n    <option value=\"middle\">Middle</option>\n    <option value=\"top\">Top</option>\n    <option value=\"bottom\">Bottom</option>\n  </select>\n</div>",
+        "Value": "middle"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "52325a4613ac4f6eb9febfd10a98d495",
+        "ParaName": "FontSize",
+        "ParaCode": "FontSize",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">FontSize</span>\n  <input id=\"FontSize\" value=\"\" class=\"form-control\" type=\"text\" placeholder=\"FontSize,it can be empty\" />\n</div>",
+        "Value": "18"
+      }
+    ]
+  },
+  "DataConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+    "DataId": "",
+    "DataName": "",
+    "DataBaseName": "",
+    "IsAutoRefresh": false,
+    "Interval": 1000.0,
+    "Sql": "",
+    "PreSql": "",
+    "CreateTime": "2016-01-20T17:36:30.5904439+08:00"
+  },
+  "HtmlTemplate": "<div id=\"mainDiv_[ElementId]\">\n  <!--**********自定义编码开始**********-->\n  <table>\n    <tr>\n      <td align=\"center\" valign=\"middle\">\n        <div id=\"showDate\"></div>\n      </td>\n    </tr>\n  </table>\n  <!--**********自定义编码结束**********-->\n</div>",
+  "JavaScriptTemplate": "(function () { \n  if('18' != '')\n    $(\"#mainDiv_[ElementId] #showDate\").css(\"font-size\",\"18px\");\n  \n  switch(\"YYYYMMDDHHMMSS\")\n  {\n    case \"YYYYMMDDWEEKDAY\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDWEEKDAY()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDWEEKDAY()); \n        },\n        24 * 60 * 60 * 1000); \n      break;\n    case \"YYYYMMDD\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDD()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDD()); \n        },\n        24 * 60 * 60 * 1000);\n      break;\n    case \"HHMMSS\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMMSS()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMMSS()); \n        },\n        1000); \n      break;\n    case \"HHMM\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMM()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getHHMM()); \n        },\n        60 * 1000); \n      break;\n    case \"YYYYMMDDHHMMSS\":\n      $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDHHMMSS()); \n      setInterval(\n        function () { \n          $(\"#mainDiv_[ElementId] #showDate\").html($.getYYYYMMDDHHMMSS()); \n        },\n        1000); \n      break;\n    default:\n      break;\n  }\n}\n).call(this);",
+  "CssTemplate": "/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n\n#mainDiv_[ElementId] table{\n  width:100%;\n  height:100%;\n}\n\n#mainDiv_[ElementId] #showDate{\n  \n}\n/********** 自定义样式结束 **********/",
+  "RenderHtml": "",
+  "CreateTime": "2016-01-20T17:38:20.1498514+08:00"
+}

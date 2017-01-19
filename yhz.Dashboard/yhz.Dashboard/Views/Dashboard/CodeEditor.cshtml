@@ -1,0 +1,55 @@
+﻿
+
+<!--
+    可编辑Html区域
+    已自动生成容器Div.Id 为 dvi+ElementId.保证全局唯一
+-->
+<div id="div[ElementId]" class="row" style="height:100%;height:100%">
+    <!--自定义编码开始-->
+    <!--自定义编码结束-->
+</div>
+
+<style>
+/*
+    可编辑样式表区域
+    建议：为了不影响全局样式
+          建议编写的样式加上限制 #div[Element]
+    例如：
+        自定义超链接样式
+        #div[Element] a{
+            
+        }
+ */
+
+#divElementId{
+
+}
+</style>
+
+<script>
+    /*可编辑脚本区域*/
+    //
+    function f_ElementId(elementId, dataId, IsAutoRefresh, Interval) {
+
+        this.starthandle() = internal;
+
+        function internal() {
+            $.getJSON(
+              "/api/Dao/GetDashboardData/[DataId]",
+              function (json) {
+                  // ********** 自定义编码 Begin **********
+                  // 此回调函数参数[json]为DataSet序列化后的Json对象
+                  // 取第一个表的表达式为 json.Table
+                  // 取第二个表的表达式为 json.Table1
+                  // 依次类推（可使用sql语句、或存储过程返回包含多个数据表的数据集）
+
+                  // 例如 表格生成
+                  $("#tabtest").html(GenTableInnerHtml(json.Table));
+
+                  // ********** 自定义编码 End **********
+              });
+        }
+    }
+
+    new f_ElementId().starthandle();
+</script>

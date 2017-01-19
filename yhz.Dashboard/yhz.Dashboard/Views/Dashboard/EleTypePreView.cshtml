@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="~/Scripts/highchartshelper.js"></script>
+
+<script>
+    m_paras = "@HttpUtility.UrlEncode(string.IsNullOrEmpty(ViewBag.Paras) ? "" : ViewBag.Paras,System.Text.Encoding.UTF8)";
+</script>
+
+<div id="mainDiv" style="border:1px solid red;">
+    <style>
+        @Html.Raw(ViewBag.ElementTypeConfig.CssTemplate)
+    </style>
+
+    @Html.Raw(ViewBag.ElementTypeConfig.HtmlTemplate)
+
+    <script>
+        @Html.Raw(ViewBag.ElementTypeConfig.JavaScriptTemplate)
+    </script>
+</div>

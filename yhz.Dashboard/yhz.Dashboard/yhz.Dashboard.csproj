@@ -1,0 +1,822 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B238DB1E-4CFA-490B-BEAB-4352F6AAD8D3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>yhz.Dashboard</RootNamespace>
+    <AssemblyName>yhz.Dashboard</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.2\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.2\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.2\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\ace\img\jsoneditor-icons.png" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\themes\cerulean\bootstrap.css" />
+    <Content Include="Content\themes\cerulean\bootstrap.min.css" />
+    <Content Include="Content\themes\cerulean\index.html" />
+    <Content Include="Content\themes\cerulean\highcharts-theme.js" />
+    <Content Include="Content\themes\cerulean\thumbnail.png" />
+    <Content Include="Content\themes\cosmo\bootstrap.css" />
+    <Content Include="Content\themes\cosmo\bootstrap.min.css" />
+    <Content Include="Content\themes\cosmo\highcharts-theme.js" />
+    <Content Include="Content\themes\cosmo\index.html" />
+    <Content Include="Content\themes\cosmo\thumbnail.png" />
+    <Content Include="Content\themes\cyborg\bootstrap.css" />
+    <Content Include="Content\themes\cyborg\bootstrap.min.css" />
+    <Content Include="Content\themes\cyborg\highcharts-theme.js" />
+    <Content Include="Content\themes\cyborg\index.html" />
+    <Content Include="Content\themes\cyborg\thumbnail.png" />
+    <Content Include="Content\themes\darkly\highcharts-theme.js" />
+    <Content Include="Content\themes\flatly\bootstrap.css" />
+    <Content Include="Content\themes\flatly\bootstrap.min.css" />
+    <Content Include="Content\themes\flatly\index.html" />
+    <Content Include="Content\themes\flatly\highcharts-theme.js" />
+    <Content Include="Content\themes\flatly\thumbnail.png" />
+    <Content Include="Content\themes\journal\bootstrap.css" />
+    <Content Include="Content\themes\journal\bootstrap.min.css" />
+    <Content Include="Content\themes\journal\index.html" />
+    <Content Include="Content\themes\journal\highcharts-theme.js" />
+    <Content Include="Content\themes\journal\thumbnail.png" />
+    <Content Include="Content\themes\lumen\bootstrap.css" />
+    <Content Include="Content\themes\lumen\bootstrap.min.css" />
+    <Content Include="Content\themes\lumen\index.html" />
+    <Content Include="Content\themes\lumen\highcharts-theme.js" />
+    <Content Include="Content\themes\lumen\thumbnail.png" />
+    <Content Include="Content\themes\paper\bootstrap.css" />
+    <Content Include="Content\themes\paper\bootstrap.min.css" />
+    <Content Include="Content\themes\paper\index.html" />
+    <Content Include="Content\themes\paper\highcharts-theme.js" />
+    <Content Include="Content\themes\paper\thumbnail.png" />
+    <Content Include="Content\themes\readable\bootstrap.css" />
+    <Content Include="Content\themes\readable\bootstrap.min.css" />
+    <Content Include="Content\themes\readable\highcharts-theme.js" />
+    <Content Include="Content\themes\readable\index.html" />
+    <Content Include="Content\themes\readable\thumbnail.png" />
+    <Content Include="Content\themes\sandstone\bootstrap.css" />
+    <Content Include="Content\themes\sandstone\bootstrap.min.css" />
+    <Content Include="Content\themes\sandstone\highcharts-theme.js" />
+    <Content Include="Content\themes\sandstone\index.html" />
+    <Content Include="Content\themes\sandstone\thumbnail.png" />
+    <Content Include="Content\themes\simplex\bootstrap.css" />
+    <Content Include="Content\themes\simplex\bootstrap.min.css" />
+    <Content Include="Content\themes\simplex\highcharts-theme.js" />
+    <Content Include="Content\themes\simplex\index.html" />
+    <Content Include="Content\themes\simplex\thumbnail.png" />
+    <Content Include="Content\themes\slate\bootstrap.css" />
+    <Content Include="Content\themes\slate\bootstrap.min.css" />
+    <Content Include="Content\themes\slate\highcharts-theme.js" />
+    <Content Include="Content\themes\slate\index.html" />
+    <Content Include="Content\themes\slate\thumbnail.png" />
+    <Content Include="Content\themes\spacelab\bootstrap.css" />
+    <Content Include="Content\themes\spacelab\bootstrap.min.css" />
+    <Content Include="Content\themes\spacelab\highcharts-theme.js" />
+    <Content Include="Content\themes\spacelab\index.html" />
+    <Content Include="Content\themes\superhero\bootstrap.css" />
+    <Content Include="Content\themes\superhero\bootstrap.min.css" />
+    <Content Include="Content\themes\superhero\highcharts-theme.js" />
+    <Content Include="Content\themes\superhero\index.html" />
+    <Content Include="Content\themes\united\bootstrap.css" />
+    <Content Include="Content\themes\united\bootstrap.min.css" />
+    <Content Include="Content\themes\united\highcharts-theme.js" />
+    <Content Include="Content\themes\united\index.html" />
+    <Content Include="Content\themes\yeti\bootstrap.css" />
+    <Content Include="Content\themes\yeti\bootstrap.min.css" />
+    <Content Include="Content\themes\yeti\index.html" />
+    <Content Include="Content\themes\yeti\highcharts-theme.js" />
+    <Content Include="Content\UserData\image\test.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\themes\default\bootstrap.css" />
+    <Content Include="Content\themes\default\bootstrap.min.css" />
+    <Content Include="Content\dashboard-tab-layout.css" />
+    <Content Include="Content\ace\jsoneditor.min.css" />
+    <Content Include="Content\themes\darkly\bootstrap.css" />
+    <Content Include="Content\themes\darkly\bootstrap.min.css" />
+    <Content Include="Content\themes\darkly\index.html" />
+    <Content Include="Content\themes\darkly\thumbnail.png" />
+    <Content Include="Content\themes\default\index.html" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\UserData\image\test1.jpg" />
+    <Content Include="FrontExt\dataTables\css\dataTables.bootstrap.css" />
+    <Content Include="FrontExt\dataTables\css\dataTables.bootstrap.min.css" />
+    <Content Include="FrontExt\dataTables\css\dataTables.foundation.css" />
+    <Content Include="FrontExt\dataTables\css\dataTables.foundation.min.css" />
+    <Content Include="FrontExt\dataTables\css\dataTables.jqueryui.css" />
+    <Content Include="FrontExt\dataTables\css\dataTables.jqueryui.min.css" />
+    <Content Include="FrontExt\dataTables\css\jquery.dataTables.css" />
+    <Content Include="FrontExt\dataTables\css\jquery.dataTables.min.css" />
+    <Content Include="FrontExt\dataTables\css\jquery.dataTables_themeroller.css" />
+    <Content Include="FrontExt\dataTables\images\favicon.ico" />
+    <Content Include="FrontExt\dataTables\images\sort_asc.png" />
+    <Content Include="FrontExt\dataTables\images\sort_asc_disabled.png" />
+    <Content Include="FrontExt\dataTables\images\sort_both.png" />
+    <Content Include="FrontExt\dataTables\images\sort_desc.png" />
+    <Content Include="FrontExt\dataTables\images\sort_desc_disabled.png" />
+    <Content Include="FrontExt\dataTables\js\dataTables.bootstrap.js" />
+    <Content Include="FrontExt\dataTables\js\dataTables.bootstrap.min.js" />
+    <Content Include="FrontExt\dataTables\js\dataTables.foundation.js" />
+    <Content Include="FrontExt\dataTables\js\dataTables.foundation.min.js" />
+    <Content Include="FrontExt\dataTables\js\dataTables.jqueryui.js" />
+    <Content Include="FrontExt\dataTables\js\dataTables.jqueryui.min.js" />
+    <Content Include="FrontExt\dataTables\js\jquery.dataTables.js" />
+    <Content Include="FrontExt\dataTables\js\jquery.dataTables.min.js" />
+    <Content Include="Scripts\ace\jsoneditor.min.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\CodeTemplate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\CodeTemplate1.json" />
+    <Content Include="Content\themes\darkly\bootswatch.less" />
+    <Content Include="Content\themes\darkly\variables.less" />
+    <Content Include="Content\themes\darkly\_bootswatch.scss" />
+    <Content Include="Content\themes\darkly\_variables.scss" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\themes\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Content\themes\cerulean\bootswatch.less" />
+    <Content Include="Content\themes\cerulean\variables.less" />
+    <Content Include="Content\themes\cerulean\_bootswatch.scss" />
+    <Content Include="Content\themes\cerulean\_variables.scss" />
+    <Content Include="Content\themes\cosmo\bootswatch.less" />
+    <Content Include="Content\themes\cosmo\variables.less" />
+    <Content Include="Content\themes\cosmo\_bootswatch.scss" />
+    <Content Include="Content\themes\cosmo\_variables.scss" />
+    <Content Include="Content\themes\cyborg\bootswatch.less" />
+    <Content Include="Content\themes\cyborg\variables.less" />
+    <Content Include="Content\themes\cyborg\_bootswatch.scss" />
+    <Content Include="Content\themes\cyborg\_variables.scss" />
+    <Content Include="Content\themes\flatly\bootswatch.less" />
+    <Content Include="Content\themes\flatly\variables.less" />
+    <Content Include="Content\themes\flatly\_bootswatch.scss" />
+    <Content Include="Content\themes\flatly\_variables.scss" />
+    <Content Include="Content\themes\journal\bootswatch.less" />
+    <Content Include="Content\themes\journal\variables.less" />
+    <Content Include="Content\themes\journal\_bootswatch.scss" />
+    <Content Include="Content\themes\journal\_variables.scss" />
+    <Content Include="Content\themes\lumen\bootswatch.less" />
+    <Content Include="Content\themes\lumen\variables.less" />
+    <Content Include="Content\themes\lumen\_bootswatch.scss" />
+    <Content Include="Content\themes\lumen\_variables.scss" />
+    <Content Include="Content\themes\paper\bootswatch.less" />
+    <Content Include="Content\themes\paper\variables.less" />
+    <Content Include="Content\themes\paper\_bootswatch.scss" />
+    <Content Include="Content\themes\paper\_variables.scss" />
+    <Content Include="Content\themes\readable\bootswatch.less" />
+    <Content Include="Content\themes\readable\variables.less" />
+    <Content Include="Content\themes\readable\_bootswatch.scss" />
+    <Content Include="Content\themes\readable\_variables.scss" />
+    <Content Include="Content\themes\sandstone\bootswatch.less" />
+    <Content Include="Content\themes\sandstone\variables.less" />
+    <Content Include="Content\themes\sandstone\_bootswatch.scss" />
+    <Content Include="Content\themes\sandstone\_variables.scss" />
+    <Content Include="Content\themes\simplex\bootswatch.less" />
+    <Content Include="Content\themes\simplex\variables.less" />
+    <Content Include="Content\themes\simplex\_bootswatch.scss" />
+    <Content Include="Content\themes\simplex\_variables.scss" />
+    <Content Include="Content\themes\slate\bootswatch.less" />
+    <Content Include="Content\themes\slate\variables.less" />
+    <Content Include="Content\themes\slate\_bootswatch.scss" />
+    <Content Include="Content\themes\slate\_variables.scss" />
+    <Content Include="Content\themes\spacelab\bootswatch.less" />
+    <Content Include="Content\themes\spacelab\variables.less" />
+    <Content Include="Content\themes\spacelab\_bootswatch.scss" />
+    <Content Include="Content\themes\spacelab\_variables.scss" />
+    <Content Include="Content\themes\superhero\bootswatch.less" />
+    <Content Include="Content\themes\superhero\variables.less" />
+    <Content Include="Content\themes\superhero\_bootswatch.scss" />
+    <Content Include="Content\themes\superhero\_variables.scss" />
+    <Content Include="Content\themes\united\bootswatch.less" />
+    <Content Include="Content\themes\united\variables.less" />
+    <Content Include="Content\themes\united\_bootswatch.scss" />
+    <Content Include="Content\themes\united\_variables.scss" />
+    <Content Include="Content\themes\yeti\bootswatch.less" />
+    <Content Include="Content\themes\yeti\variables.less" />
+    <Content Include="Content\themes\yeti\_bootswatch.scss" />
+    <Content Include="Content\themes\yeti\_variables.scss" />
+    <Content Include="FrontExt\dataTables\images\Sorting icons.psd" />
+    <None Include="Scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="Scripts\ace\ace.js" />
+    <Content Include="Scripts\ace\jsonlint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\comment\comment.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\comment\continuecomment.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\dialog\dialog.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\dialog\dialog.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\display\fullscreen.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\display\fullscreen.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\display\panel.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\display\placeholder.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\display\rulers.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\edit\closebrackets.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\edit\closetag.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\edit\continuelist.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\edit\matchbrackets.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\edit\matchtags.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\edit\trailingspace.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\brace-fold.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\comment-fold.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\foldcode.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\foldgutter.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\foldgutter.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\indent-fold.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\markdown-fold.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\fold\xml-fold.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\anyword-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\css-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\html-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\javascript-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\show-hint.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\show-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\sql-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\hint\xml-hint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\coffeescript-lint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\css-lint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\javascript-lint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\json-lint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\lint.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\lint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\lint\yaml-lint.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\merge\merge.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\merge\merge.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\mode\loadmode.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\mode\multiplex.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\mode\multiplex_test.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\mode\overlay.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\mode\simple.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\runmode\colorize.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\runmode\runmode-standalone.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\runmode\runmode.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\runmode\runmode.node.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\scroll\annotatescrollbar.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\scroll\scrollpastend.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\scroll\simplescrollbars.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\scroll\simplescrollbars.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\search\match-highlighter.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\search\matchesonscrollbar.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\search\matchesonscrollbar.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\search\search.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\search\searchcursor.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\selection\active-line.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\selection\mark-selection.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\selection\selection-pointer.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\tern\tern.css" />
+    <Content Include="Scripts\CodeMirror-master\addon\tern\tern.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\tern\worker.js" />
+    <Content Include="Scripts\CodeMirror-master\addon\wrap\hardwrap.js" />
+    <Content Include="Scripts\CodeMirror-master\doc\activebookmark.js" />
+    <Content Include="Scripts\CodeMirror-master\doc\compress.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\docs.css" />
+    <Content Include="Scripts\CodeMirror-master\doc\internals.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\logo.png" />
+    <Content Include="Scripts\CodeMirror-master\doc\logo.svg" />
+    <Content Include="Scripts\CodeMirror-master\doc\manual.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\realworld.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\releases.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\reporting.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\upgrade_v2.2.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\upgrade_v3.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\upgrade_v4.html" />
+    <Content Include="Scripts\CodeMirror-master\doc\yinyang.png" />
+    <Content Include="Scripts\CodeMirror-master\keymap\emacs.js" />
+    <Content Include="Scripts\CodeMirror-master\keymap\sublime.js" />
+    <Content Include="Scripts\CodeMirror-master\keymap\vim.js" />
+    <Content Include="Scripts\CodeMirror-master\lib\codemirror.css" />
+    <Content Include="Scripts\CodeMirror-master\lib\codemirror.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\apl\apl.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\apl\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\asciiarmor\asciiarmor.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\asciiarmor\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\asn.1\asn.1.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\asn.1\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\asterisk\asterisk.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\asterisk\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\clike\clike.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\clike\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\clike\scala.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\clike\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\clojure\clojure.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\clojure\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\cmake\cmake.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\cmake\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\cobol\cobol.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\cobol\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\coffeescript\coffeescript.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\coffeescript\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\commonlisp\commonlisp.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\commonlisp\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\css.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\less.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\less_test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\scss.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\scss_test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\css\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\cypher\cypher.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\cypher\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\dart\dart.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\dart\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\diff\diff.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\diff\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\django\django.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\django\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\dockerfile\dockerfile.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\dockerfile\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\dtd\dtd.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\dtd\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\dylan\dylan.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\dylan\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\d\d.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\d\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\ebnf\ebnf.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ebnf\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\ecl\ecl.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ecl\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\eiffel\eiffel.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\eiffel\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\elm\elm.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\elm\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\erlang\erlang.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\erlang\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\factor\factor.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\factor\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\forth\forth.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\forth\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\fortran\fortran.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\fortran\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\gas\gas.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\gas\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\gfm\gfm.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\gfm\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\gfm\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\gherkin\gherkin.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\gherkin\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\go\go.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\go\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\groovy\groovy.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\groovy\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\haml\haml.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\haml\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\haml\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\handlebars\handlebars.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\handlebars\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\haskell\haskell.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\haskell\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\haxe\haxe.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\haxe\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\htmlembedded\htmlembedded.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\htmlembedded\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\htmlmixed\htmlmixed.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\htmlmixed\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\http\http.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\http\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\idl\idl.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\idl\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\jade\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\jade\jade.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\javascript\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\javascript\javascript.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\javascript\json-ld.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\javascript\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\javascript\typescript.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\jinja2\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\jinja2\jinja2.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\julia\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\julia\julia.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\kotlin\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\kotlin\kotlin.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\livescript\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\livescript\livescript.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\lua\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\lua\lua.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\markdown\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\markdown\markdown.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\markdown\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\mathematica\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\mathematica\mathematica.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\meta.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\mirc\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\mirc\mirc.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\mllike\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\mllike\mllike.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\modelica\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\modelica\modelica.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\mumps\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\mumps\mumps.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\nginx\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\nginx\nginx.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ntriples\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\ntriples\ntriples.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\octave\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\octave\octave.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\pascal\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\pascal\pascal.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\pegjs\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\pegjs\pegjs.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\perl\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\perl\perl.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\php\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\php\php.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\php\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\pig\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\pig\pig.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\properties\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\properties\properties.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\puppet\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\puppet\puppet.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\python\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\python\python.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\q\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\q\q.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\rpm\changes\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\rpm\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\rpm\rpm.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\rst\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\rst\rst.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ruby\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\ruby\ruby.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ruby\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\rust\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\rust\rust.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\r\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\r\r.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\sass\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\sass\sass.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\scheme\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\scheme\scheme.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\shell\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\shell\shell.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\shell\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\sieve\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\sieve\sieve.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\slim\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\slim\slim.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\slim\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\smalltalk\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\smalltalk\smalltalk.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\smarty\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\smarty\smarty.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\solr\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\solr\solr.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\soy\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\soy\soy.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\sparql\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\sparql\sparql.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\spreadsheet\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\spreadsheet\spreadsheet.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\sql\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\sql\sql.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\stex\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\stex\stex.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\stex\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\stylus\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\stylus\stylus.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\swift\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\swift\swift.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\tcl\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\tcl\tcl.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\textile\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\textile\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\textile\textile.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\tiddlywiki\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\tiddlywiki\tiddlywiki.css" />
+    <Content Include="Scripts\CodeMirror-master\mode\tiddlywiki\tiddlywiki.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\tiki\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\tiki\tiki.css" />
+    <Content Include="Scripts\CodeMirror-master\mode\tiki\tiki.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\toml\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\toml\toml.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\tornado\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\tornado\tornado.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\troff\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\troff\troff.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ttcn-cfg\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\ttcn-cfg\ttcn-cfg.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\ttcn\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\ttcn\ttcn.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\turtle\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\turtle\turtle.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\twig\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\twig\twig.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\vbscript\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\vbscript\vbscript.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\vb\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\vb\vb.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\velocity\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\velocity\velocity.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\verilog\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\verilog\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\verilog\verilog.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\xml\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\xml\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\xml\xml.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\xquery\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\xquery\test.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\xquery\xquery.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\yaml\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\yaml\yaml.js" />
+    <Content Include="Scripts\CodeMirror-master\mode\z80\index.html" />
+    <Content Include="Scripts\CodeMirror-master\mode\z80\z80.js" />
+    <Content Include="Scripts\CodeMirror-master\theme\3024-day.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\3024-night.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\ambiance-mobile.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\ambiance.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\base16-dark.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\base16-light.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\blackboard.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\cobalt.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\colorforth.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\eclipse.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\elegant.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\erlang-dark.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\lesser-dark.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\liquibyte.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\mbo.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\mdn-like.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\midnight.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\monokai.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\neat.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\neo.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\night.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\paraiso-dark.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\paraiso-light.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\pastel-on-dark.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\rubyblue.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\solarized.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\the-matrix.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\tomorrow-night-bright.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\tomorrow-night-eighties.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\ttcn.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\twilight.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\vibrant-ink.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\xq-dark.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\xq-light.css" />
+    <Content Include="Scripts\CodeMirror-master\theme\zenburn.css" />
+    <Content Include="Scripts\uartdashboard.js" />
+    <Content Include="Scripts\dashboard.js" />
+    <Content Include="Scripts\JavaScript1.js" />
+    <Content Include="Scripts\views\dashboard\dashboardconfig.js" />
+    <Content Include="Scripts\views\dashboard\dataconfig.js" />
+    <Content Include="Scripts\views\dashboard\elementconfig.js" />
+    <Content Include="Scripts\views\dashboard\elementtypeconfig.js" />
+    <Content Include="Scripts\views\dashboard\terminalinfo.js" />
+    <Content Include="Scripts\db-canvas-layout.js" />
+    <Content Include="Scripts\db-tab-layout.js" />
+    <Content Include="Scripts\highcharts.js" />
+    <Content Include="Scripts\highchartshelper.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\layer\extend\layer.ext.js" />
+    <Content Include="Scripts\layer\layer.js" />
+    <Content Include="Scripts\layer\skin\default\icon-ext.png" />
+    <Content Include="Scripts\layer\skin\default\icon.png" />
+    <Content Include="Scripts\layer\skin\default\loading-0.gif" />
+    <Content Include="Scripts\layer\skin\default\loading-1.gif" />
+    <Content Include="Scripts\layer\skin\default\loading-2.gif" />
+    <Content Include="Scripts\layer\skin\layer.css" />
+    <Content Include="Scripts\layer\skin\layer.ext.css" />
+    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\views\resource\upload.js" />
+    <Content Include="Views\Shared\_Layout.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Test\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Scripts\jquery-2.1.4.min.map" />
+    <Content Include="Views\Dashboard\TerminalPlayer.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Cache\SqlDataCache.cs" />
+    <Compile Include="Cache\SqlDataDescription.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConfigController.cs" />
+    <Compile Include="Controllers\UADashboardDaoController.cs" />
+    <Compile Include="Controllers\DaoController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\ResourceController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="Controllers\UADashboardRuntimeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GlobalThemes.cs" />
+    <Compile Include="GlobalUserResources.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Shared\Portal.cshtml" />
+    <Content Include="Views\Dashboard\Main.cshtml" />
+    <Content Include="Views\Dashboard\DataConfig.cshtml" />
+    <Content Include="Views\Dashboard\ElementTypeConfig.cshtml" />
+    <Content Include="Views\Dashboard\DashboardConfig.cshtml" />
+    <Content Include="Views\Dashboard\EleTypePreView.cshtml" />
+    <Content Include="Views\Dashboard\TerminalInfo.cshtml" />
+    <Content Include="Views\Dashboard\CodeEditor.cshtml" />
+    <Content Include="Views\Dashboard\ElementConfig.cshtml" />
+    <Content Include="Views\Shared\_Player.cshtml" />
+    <Content Include="Views\Test\Canvas.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Resource\Upload.cshtml" />
+    <Content Include="Views\Dashboard\TerminalView.cshtml" />
+    <Content Include="Views\Dashboard\DashboardPlayer.cshtml" />
+    <Content Include="Views\UADashboardRuntime\ElementPreview.cshtml" />
+    <Content Include="Views\UADashboardRuntime\TerminalPlay.cshtml" />
+    <Content Include="Views\UADashboardRuntime\DashboardPlay.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Content\UserData\audio\" />
+    <Folder Include="Content\UserData\video\" />
+    <Folder Include="Scripts\CustomScript\" />
+    <Folder Include="Scripts\misc\" />
+    <Folder Include="Scripts\sanbox\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\yhz.Dashboard.Common\yhz.Dashboard.Common.csproj">
+      <Project>{b01fd606-c1c7-441f-a5bd-d6be15101921}</Project>
+      <Name>yhz.Dashboard.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\yhz.Dashboard.Core\yhz.Dashboard.Core.csproj">
+      <Project>{236f814c-d914-40a7-883c-f2f669ac2cd2}</Project>
+      <Name>yhz.Dashboard.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\yhz.Dashboard.Resources\yhz.Dashboard.Resources.csproj">
+      <Project>{c3e8ac72-8e6c-4c9d-a34a-aa69ea1db15a}</Project>
+      <Name>yhz.Dashboard.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UAUtility\UAUtility.csproj">
+      <Project>{1e955426-8692-4219-8a37-4d2bc20fbfbb}</Project>
+      <Name>UAUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>35001</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:60015/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。启用“NuGet 程序包还原”可下载这些程序包。有关详细信息，请参阅 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

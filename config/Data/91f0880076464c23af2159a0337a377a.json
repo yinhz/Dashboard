@@ -1,0 +1,11 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+  "DataId": "91f0880076464c23af2159a0337a377a",
+  "DataName": "Chart_Test_Data",
+  "DataBaseName": "SitMesDb_SqlServer",
+  "IsAutoRefresh": true,
+  "Interval": 5000.0,
+  "Sql": "select '2015-05-01' as 'xCName',N'主车间' as 'serieCName',6537 as 'valueCName'\nunion\nselect '2015-05-01' as 'xCName',N'奶台' as 'serieCName',432 as 'valueCName'\nunion\nselect '2015-05-01' as 'xCName',N'制冷间' as 'serieCName',2550 as 'valueCName'\nunion\nselect '2015-05-02' as 'xCName',N'主车间' as 'serieCName',5537 as 'valueCName'\nunion\nselect '2015-05-02' as 'xCName',N'奶台' as 'serieCName',332 as 'valueCName'\nunion\nselect '2015-05-02' as 'xCName',N'制冷间' as 'serieCName',1550 as 'valueCName'",
+  "PreSql": "",
+  "CreateTime": "2016-01-26T10:58:10.8982308+08:00"
+}

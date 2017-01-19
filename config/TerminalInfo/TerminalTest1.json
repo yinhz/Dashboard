@@ -1,0 +1,33 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardTerminalInfo, yhz.Dashboard.Core",
+  "TerminalId": "TerminalTest1",
+  "RedirectTerminalId": "",
+  "RedirectTerminalName": "",
+  "TerminalName": "",
+  "Ip": "::1",
+  "Dashboards": [
+    {
+      "$type": "yhz.Dashboard.Core.Config.TerDashboardConfig, yhz.Dashboard.Core",
+      "PlayOrder": 1,
+      "PlayCycle": 10,
+      "Theme": "default",
+      "Paras": "",
+      "DashboardId": "0ef2dadb51c4441fa3a6f0b89d5219fd",
+      "DashboardName": "Dashboard_1",
+      "Descript": null,
+      "RowNums": 1,
+      "ColumnNums": 1,
+      "ElementConfigs": [],
+      "QueryParas": null,
+      "BackgroundImagePath": null,
+      "CreateTime": "2017-01-19T14:38:36.1967318+09:00"
+    }
+  ],
+  "DashboardId": null,
+  "DashboardName": "",
+  "Paras": "null",
+  "IsForbidden": false,
+  "LastEditTime": "20170119143918328",
+  "Theme": "default",
+  "CreateTime": "2017-01-19T14:38:07.4567318+09:00"
+}

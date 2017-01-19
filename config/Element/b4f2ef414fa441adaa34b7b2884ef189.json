@@ -1,0 +1,64 @@
+﻿{
+  "$type": "yhz.Dashboard.Core.Config.DashboardElementConfig, yhz.Dashboard.Core",
+  "ZIndex": 0,
+  "Descript": "Image",
+  "LocElementId": null,
+  "ElementId": "b4f2ef414fa441adaa34b7b2884ef189",
+  "ElementName": "BackImage",
+  "RowIndex": 0,
+  "ColumnIndex": 0,
+  "RowSpan": 1,
+  "ColumnSpan": 1,
+  "TypeConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashboardElementTypeConfig, yhz.Dashboard.Core",
+    "TypeId": "49f14db44de245e2aa739cee85738be7",
+    "TypeName": "Dashboard_Image",
+    "Descript": "Dashboard image control",
+    "HtmlTemplate": "<!--yhz Dashboard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n\t可编辑Html区域\n\t可使用变量 [ElementId]\n    已自动生成容器Div.Id 为 mainDvi_ElementId.保证全局唯一.\n\t内容自行编辑。如 <table id=\"table\" class=\"table table-responsive table-hover\"></table>\n-->\n<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  <table>\n    <tr>\n      <td align=\"[Align]\" valign=\"[Valign]\">\n  \t\t<image src=\"/Content/UserData/image/[Image]\"/>\n      </td>\n    </tr>\n  </table>\n  <!--**********自定义编码结束**********-->\n</div>",
+    "JavaScriptTemplate": "",
+    "CssTemplate": "/*yhz Dashboard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n  可编辑样式表区域\n  建议：为了不影响全局样式\n       建议编写的样式加上限制 #mainDiv_[ElementId]\n  例如：\n      自定义超链接样式\n      #mainDiv_[ElementId] a{\n            \n      }\n */\n\n/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n\n#mainDiv_[ElementId] table{\n  width:100%;\n  height:100%;\n}\n/********** 自定义样式结束 **********/",
+    "CreateTime": "2016-01-20T16:42:32.6911463+08:00",
+    "ParaConfigs": [
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "164abd0dd6ab45bcbc7be6d06a126055",
+        "ParaName": "Align",
+        "ParaCode": "Align",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Align</span>\n  <select id=\"Align\" class=\"form-control\">\n    <option value=\"center\">Center</option>\n    <option value=\"left\">Left</option>\n    <option value=\"right\">Right</option>\n  </select>\n</div>",
+        "Value": "center"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "c77fbb7c98b04e439f0b9c5b7a82f0f7",
+        "ParaName": "Valign",
+        "ParaCode": "Valign",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Valign</span>\n  <select id=\"Valign\" class=\"form-control\">\n    <option value=\"middle\">Middle</option>\n    <option value=\"top\">Top</option>\n    <option value=\"bottom\">Bottom</option>\n  </select>\n</div>",
+        "Value": "middle"
+      },
+      {
+        "$type": "yhz.Dashboard.Core.Config.ParaConfig, yhz.Dashboard.Core",
+        "ParaId": "f0385c071a96477883970115bac26777",
+        "ParaName": "Image",
+        "ParaCode": "Image",
+        "RenderScript": "<div class=\"input-group\">\n  <span class=\"input-group-addon\" id=\"basic-addon1\">Image</span>\n  <select id=\"Image\" class=\"form-control\">\n  </select>\n</div>\n<script>\n  $.ajax(\n    {\n      url: \"/api/Config/GetImages/\",\n      type: \"get\",\n      dataType: \"json\",\n      async: false,\n      success: function (data) {\n        var sel = $(\"#Image\");\n        for (i in data)\n        {\n          sel.append(\"<option value=\\\"\" + data[i] + \"\\\">\" + data[i] + \"</option>\");\n        }\n      }\n    }\n  );\n</script>",
+        "Value": "haixinlogo.png"
+      }
+    ]
+  },
+  "DataConfig": {
+    "$type": "yhz.Dashboard.Core.Config.DashboardDataConfig, yhz.Dashboard.Core",
+    "DataId": "",
+    "DataName": "",
+    "DataBaseName": "",
+    "IsAutoRefresh": false,
+    "Interval": 1000.0,
+    "Sql": "",
+    "PreSql": "",
+    "CreateTime": "2016-01-20T17:04:12.0557949+08:00"
+  },
+  "HtmlTemplate": "<!--yhz Dashboard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n\t可编辑Html区域\n\t可使用变量 [ElementId]\n    已自动生成容器Div.Id 为 mainDvi_ElementId.保证全局唯一.\n\t内容自行编辑。如 <table id=\"table\" class=\"table table-responsive table-hover\"></table>\n-->\n<div id=\"mainDiv_[ElementId]\">\n  <!--自动生成代码结束-->\n  <!--**********自定义编码开始**********-->\n  <table>\n    <tr>\n      <td align=\"center\" valign=\"middle\" onclick='window.history.go(-1);'>\n  \t\t<image src=\"/Content/UserData/image/haixinlogo.png\"/>\n      </td>\n    </tr>\n  </table>\n  <!--**********自定义编码结束**********-->\n</div>",
+  "JavaScriptTemplate": "",
+  "CssTemplate": "/*yhz Dashboard 自动生成代码，请勿擅自改动。仅在指示区域进行编辑\n  可编辑样式表区域\n  建议：为了不影响全局样式\n       建议编写的样式加上限制 #mainDiv_[ElementId]\n  例如：\n      自定义超链接样式\n      #mainDiv_[ElementId] a{\n            \n      }\n */\n\n/********** 自定义样式开始 **********/\n#mainDiv_[ElementId]{\n  width:100%;\n  height:100%;\n}\n\n#mainDiv_[ElementId] table{\n  width:100%;\n  height:100%;\n}\n/********** 自定义样式结束 **********/",
+  "RenderHtml": "",
+  "CreateTime": "2016-01-20T17:04:12.0557949+08:00"
+}
