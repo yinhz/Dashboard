@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dashboard
 {
@@ -34,7 +31,7 @@ namespace Dashboard
                 // 目前先简单替换。后面考虑 使用 提供者 模式 解耦。 IParaApplyProvide
                 foreach (var para in paras)
                 {
-                    command = command.Replace("@" + para.Key, para.Value.ToString());
+                    command = command.Replace("@" + para.Key, para.Value);
                 }
             }
 

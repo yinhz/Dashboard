@@ -13,7 +13,7 @@ namespace Dashboard
         /// <summary>
         /// 看板标识
         /// </summary>
-        string Id { get; set; }
+        TKey Id { get; set; }
 
         /// <summary>
         /// 看板名称

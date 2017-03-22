@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Oracle.ManagedDataAccess.Client;
 
 namespace Dashboard
@@ -46,7 +42,7 @@ namespace Dashboard
             {
                 foreach (var para in paras)
                 {
-                    command = command.Replace("@" + para.Key, para.Value.ToString());
+                    command = command.Replace("@" + para.Key, para.Value);
                 }
             }
 
